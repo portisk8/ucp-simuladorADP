@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=Algoritmo
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Algoritmo\ here.\r\n\ \r\n\ @author\ (name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=name\ cara\ func\ vent\ p_proceso
+comment1.target=Algoritmo(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ Proceso)
+comment2.params=name\ cara\ func\ vent\ lista
+comment2.target=Algoritmo(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.util.ArrayList)
+numComments=3
