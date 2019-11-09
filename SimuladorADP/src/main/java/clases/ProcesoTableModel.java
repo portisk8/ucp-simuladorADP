@@ -26,11 +26,11 @@ public class ProcesoTableModel extends AbstractTableModel{
     @Override
     public int getRowCount() {
         int size; 
-      if (listProcess == null) { 
+      if (getListProcess() == null) { 
          size = 0; 
       } 
       else { 
-         size = listProcess.size(); 
+         size = getListProcess().size(); 
       } 
       return size; 
     }
@@ -50,13 +50,13 @@ public class ProcesoTableModel extends AbstractTableModel{
     public Object getValueAt(int row, int col) {
         Object temp = null; 
       if (col == 0) { 
-        temp = new Boolean(listProcess.get(row).isSeleccionado()); 
+        temp = new Boolean(getListProcess().get(row).isSeleccionado()); 
       } else if (col == 1) { 
-         temp = listProcess.get(row).getNombre(); 
+         temp = getListProcess().get(row).getNombre(); 
       }  else if (col == 2) { 
-         temp = new Double(listProcess.get(row).getInstante_entrada()); 
+         temp = new Double(getListProcess().get(row).getInstante_entrada()); 
       } else if (col == 3) { 
-         temp = new Double(listProcess.get(row).getDuracion()); 
+         temp = new Double(getListProcess().get(row).getDuracion()); 
       } 
       return temp; 
     }
@@ -64,7 +64,7 @@ public class ProcesoTableModel extends AbstractTableModel{
     @Override
    public void setValueAt(Object aValue, int rowIndex, int columnIndex)
    {
-       Proceso row = listProcess.get(rowIndex);
+       Proceso row = getListProcess().get(rowIndex);
        if(0 == columnIndex) {
            row.setSeleccionado((boolean) aValue);
        }
@@ -93,39 +93,66 @@ public boolean isCellEditable(int rowIndex, int columnIndex)
     
     public void addRow(Proceso rowData)
     {
-        listProcess.add(rowData);
-        fireTableRowsInserted(listProcess.size() - 1, listProcess.size() - 1);
+        getListProcess().add(rowData);
+        fireTableRowsInserted(getListProcess().size() - 1, getListProcess().size() - 1);
     }
     public void removeRow(int index){
-        listProcess.remove(index);
+        getListProcess().remove(index);
         fireTableRowsDeleted(index, index);
     }
     
     public ArrayList<Proceso> getSelectedRows(){
         ArrayList<Proceso> listado = new ArrayList<Proceso>();
-        for (Proceso p : this.listProcess) {
+        for (Proceso p : this.getListProcess()) {
             if(p.isSeleccionado()) listado.add(p);
         }
         return listado;
     }
     
     public Proceso getProceso(int index){
-        return this.listProcess.get(index);
+        return this.getListProcess().get(index);
     }
 
     public boolean esElMasTemprano(Proceso process) {
         Proceso procesoMinimo = new Proceso();
         double min = 1000;
         int indice = 0;
-        for (Proceso p : this.listProcess) {
+        for (Proceso p : this.getListProcess()) {
             if (min < p.getInstante_entrada()){
                 min = p.getInstante_entrada();
                 procesoMinimo = p;
             }else if(min == p.getInstante_entrada()){
-                indice = (this.listProcess.indexOf(p) < this.listProcess.indexOf(procesoMinimo))?this.listProcess.indexOf(p) : this.listProcess.indexOf(procesoMinimo);
+                indice = (this.getListProcess().indexOf(p) < this.getListProcess().indexOf(procesoMinimo))?this.getListProcess().indexOf(p) : this.getListProcess().indexOf(procesoMinimo);
             }
         }
         if(process.getNombre().equals(procesoMinimo.getNombre())) return true;
         return false;
+    }
+    
+    public Proceso procesoMenorTiempoEjecucion(){
+        double min = Double.MAX_VALUE;
+        Proceso proceso = new Proceso();
+        for (Proceso procesoAux : this.getListProcess()) {
+            if(procesoAux.getDuracion()<min){
+                min = procesoAux.getDuracion();
+                proceso = procesoAux;
+            }
+        }
+        return proceso;
+        
+    }
+
+    /**
+     * @return the listProcess
+     */
+    public ArrayList<Proceso> getListProcess() {
+        return listProcess;
+    }
+
+    /**
+     * @param listProcess the listProcess to set
+     */
+    public void setListProcess(ArrayList<Proceso> listProcess) {
+        this.listProcess = listProcess;
     }
 }

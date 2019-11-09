@@ -15,6 +15,7 @@ public class Proceso implements Comparable<Proceso>{
     private String nombre;
     private double instante_entrada;
     private double duracion;
+    private double duracionRestante;
     private boolean seleccionado;
     private boolean finalizado;
 
@@ -25,6 +26,7 @@ public class Proceso implements Comparable<Proceso>{
         this.setDuracion(0);
         this.setSeleccionado(false);
         this.setFinalizado(false);
+        this.setDuracionRestante(this.getDuracion());
     }
     
     public Proceso(int id, String nombre){
@@ -34,6 +36,7 @@ public class Proceso implements Comparable<Proceso>{
         this.setDuracion(0);
         this.setSeleccionado(false);
         this.setFinalizado(false);
+        this.setDuracionRestante(this.getDuracion());
     }
     
     public Proceso(int id, String nombre, double instante_entrada, double duracion){
@@ -43,6 +46,7 @@ public class Proceso implements Comparable<Proceso>{
         this.setDuracion(duracion);
         this.setSeleccionado(false);
         this.setFinalizado(false);
+        this.setDuracionRestante(this.getDuracion());
     }
     
     public int getId() {
@@ -126,6 +130,24 @@ public class Proceso implements Comparable<Proceso>{
      */
     public void setFinalizado(boolean finalizado) {
         this.finalizado = finalizado;
+    }
+
+    /**
+     * @return the duracionRestante
+     */
+    public double getDuracionRestante() {
+        return duracionRestante;
+    }
+
+    /**
+     * @param duracionRestante the duracionRestante to set
+     */
+    public void setDuracionRestante(double duracionRestante) {
+        this.duracionRestante = duracionRestante;
+    }
+    
+    public double calcularDuracionRestante(int quanto){
+        return this.getDuracionRestante()-quanto;
     }
 }
         
