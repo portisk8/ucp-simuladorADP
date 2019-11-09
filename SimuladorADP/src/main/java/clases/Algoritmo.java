@@ -1,14 +1,71 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package clases;
 
-/**
- *
- * @author porti
- */
+package clases;
+import java.util.*;
+
+
 public class Algoritmo {
+    private String nombre;
+    private String caracteristicas;
+    private String ventaja;
+    private ArrayList<Proceso> procesos;
+
+    public Algoritmo(){
+        this.setNombre(null);
+        this.setCaracteristicas(null);
+        this.setVentaja(null);
+        this.setProcesos(new ArrayList<Proceso>());
+    }
     
+    public Algoritmo(String nombre, String caracteristicas, String funcion, String ventaja){
+        this.setNombre(nombre);
+        this.setCaracteristicas(caracteristicas);
+        this.setVentaja(ventaja);
+        this.setProcesos(new ArrayList<Proceso>());
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
+
+    public String getVentaja() {
+        return ventaja;
+    }
+
+    public void setVentaja(String ventaja) {
+        this.ventaja = ventaja;
+    }
+
+    
+    public String toString(){
+        return "Nombre del algoritmo: "+this.getNombre()+"\n\n"+"Caracteristicas: "+this.getCaracteristicas()+"\n\n"+"Ventajas: "+this.getVentaja()+"\n\n";
+    }
+
+    public ArrayList<Proceso> getProcesos() {
+        return procesos;
+    }
+
+    public void setProcesos(ArrayList<Proceso> procesos) {
+        this.procesos = procesos;
+    }
+    
+    public boolean agregarProceso(Proceso proceso){
+        return this.getProcesos().add(proceso);
+    }
+    
+    public boolean quitarProceso(Proceso proceso){
+        return this.getProcesos().remove(proceso);
+    }
 }
