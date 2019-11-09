@@ -8,6 +8,9 @@ public class Algoritmo {
     private String caracteristicas;
     private String ventaja;
     private ArrayList<Proceso> procesos;
+    private ProcesoTableModel pendiente;
+    private ProcesoTableModel ejecutando;
+    private ProcesoTableModel listo;
 
     public Algoritmo(){
         this.setNombre(null);
@@ -16,7 +19,7 @@ public class Algoritmo {
         this.setProcesos(new ArrayList<Proceso>());
     }
     
-    public Algoritmo(String nombre, String caracteristicas, String funcion, String ventaja){
+    public Algoritmo(String nombre, String caracteristicas, String ventaja){
         this.setNombre(nombre);
         this.setCaracteristicas(caracteristicas);
         this.setVentaja(ventaja);
@@ -67,5 +70,47 @@ public class Algoritmo {
     
     public boolean quitarProceso(Proceso proceso){
         return this.getProcesos().remove(proceso);
+    }
+
+    /**
+     * @return the pendiente
+     */
+    public ProcesoTableModel getPendiente() {
+        return pendiente;
+    }
+
+    /**
+     * @param pendiente the pendiente to set
+     */
+    public void setPendiente(ProcesoTableModel pendiente) {
+        this.pendiente = pendiente;
+    }
+
+    /**
+     * @return the ejecutando
+     */
+    public ProcesoTableModel getEjecutando() {
+        return ejecutando;
+    }
+
+    /**
+     * @param ejecutando the ejecutando to set
+     */
+    public void setEjecutando(ProcesoTableModel ejecutando) {
+        this.ejecutando = ejecutando;
+    }
+
+    /**
+     * @return the listo
+     */
+    public ProcesoTableModel getListo() {
+        return listo;
+    }
+
+    /**
+     * @param listo the listo to set
+     */
+    public void setListo(ProcesoTableModel listo) {
+        this.listo = listo;
     }
 }

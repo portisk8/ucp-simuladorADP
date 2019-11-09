@@ -1,26 +1,43 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package clases;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author sala 23 - pcs 16
  */
-public class RR extends Algoritmo{
-        
+public class RR extends Algoritmo implements Runnable{
     
-    public RR(String nombre, String caracteristicas, String funcion, String ventaja, ArrayList<Proceso> procesos){
-        super(nombre, caracteristicas, funcion, ventaja);
+    
+    
+    
+    public RR(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos){
+        super(nombre, caracteristicas, ventaja);
+        Collections.sort(procesos);
+        super.setPendiente(new ProcesoTableModel(procesos));
+        super.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
+        super.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
         this.setProcesos(procesos);
+        
     }
     
     public RR(String nombre, String caracteristicas, String funcion, String ventaja, Proceso proceso){
-        super(nombre, caracteristicas, funcion, ventaja);
+        super(nombre, caracteristicas, ventaja);
         this.setProcesos(new ArrayList<Proceso>());
         this.agregarProceso(proceso);
     }
+    
+    public boolean agregarProceso(Proceso proceso){
+        return this.getProcesos().add(proceso);
+    }
+    
+    public boolean quitarProceso(Proceso proceso){
+        return this.getProcesos().remove(proceso);
+    }
 
+    public void run() {
+           
+        }
 }

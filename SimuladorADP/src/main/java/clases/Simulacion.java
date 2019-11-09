@@ -46,10 +46,11 @@ public class Simulacion {
     
     
     public void simular(){
+        
     
     }
     
-    public ArrayList leerProcesos(){
+    public ArrayList<Proceso> leerProcesos(){
         ArrayList procesos = new ArrayList();
         try {
             
