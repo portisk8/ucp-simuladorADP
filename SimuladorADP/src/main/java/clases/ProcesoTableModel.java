@@ -129,18 +129,21 @@ public boolean isCellEditable(int rowIndex, int columnIndex)
         return false;
     }
     
-    public Proceso procesoMenorTiempoEjecucion(){
+    public int procesoMenorTiempoEjecucion(){
         double min = Double.MAX_VALUE;
-        Proceso proceso = new Proceso();
+        int i=0, indice=0;
         for (Proceso procesoAux : this.getListProcess()) {
             if(procesoAux.getDuracion()<min){
                 min = procesoAux.getDuracion();
-                proceso = procesoAux;
+                indice=i;
             }
+            i++;
         }
-        return proceso;
+        return indice;
         
     }
+    
+    
 
     /**
      * @return the listProcess

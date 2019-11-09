@@ -9,6 +9,7 @@ import clases.FIFO;
 import clases.Proceso;
 import clases.ProcesoTableModel;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
@@ -30,8 +31,9 @@ public class FifoView extends javax.swing.JFrame {
         initComponents();
         ArrayList<Proceso> listado = new ArrayList();
        int orden = 10;
+       Random r = new Random();
         for (int i = 0; i < 10; i++) {
-            Proceso p = new Proceso(i, "p"+i, orden, 2);
+            Proceso p = new Proceso(i, "p"+i, orden, r.nextInt((6 - 1) + 1) + 1);
             orden--;
             listado.add(p);
         }

@@ -46,8 +46,8 @@ public class RR extends Algoritmo implements Runnable{
                     }
                 }
                 if(super.getPendiente().getRowCount()>0){
-                proceso = super.getPendiente().procesoMenorTiempoEjecucion();//carga proceso de la tabla pendiente a la variable proceso
-                super.getPendiente().removeRow(0);//una vez cargado el proceso se remueva de la tabla pendiente
+                proceso = super.getPendiente().getProceso(super.getPendiente().procesoMenorTiempoEjecucion());//carga proceso de la tabla pendiente a la variable proceso
+                super.getPendiente().removeRow(super.getPendiente().procesoMenorTiempoEjecucion());//una vez cargado el proceso se remueva de la tabla pendiente
                 super.getEjecutando().addRow(proceso);//se envia el proceso a la tabla de procesos en ejecucion
                 for (int i = 0; i < this.getQuanto(); i++) {//para i iniciando en 0 hasta i menor al tiempo de rafaga de cpu, i aumenta en 1
                     timer++;//variable timer aumenta en uno
