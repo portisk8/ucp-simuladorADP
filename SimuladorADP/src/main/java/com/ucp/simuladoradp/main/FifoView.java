@@ -31,12 +31,8 @@ public class FifoView extends javax.swing.JFrame {
         ArrayList<Proceso> listado = new ArrayList();
        int orden = 10;
         for (int i = 0; i < 10; i++) {
-            Proceso p = new Proceso();
-            p.setInstante_entrada(orden);
-            p.setNombre("p"+i);
-            p.setDuracion(2);
-            orden -= 1;
-            p.setId(i);
+            Proceso p = new Proceso(i, "p"+i, orden, 2);
+            orden--;
             listado.add(p);
         }
         listProcess = listado;

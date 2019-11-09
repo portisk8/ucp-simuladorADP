@@ -61,23 +61,30 @@ public class FIFO extends Algoritmo implements Runnable{
                         super.getPendiente().addRow(procesoActual);
                     }
                 }
-                if(super.getPendiente().getRowCount()>0){
-                proceso = super.getPendiente().getProceso(0);//carga proceso de la tabla pendiente a la variable proceso
-                super.getPendiente().removeRow(0);//una vez cargado el proceso se remueva de la tabla pendiente
-                super.getEjecutando().addRow(proceso);//se envia el proceso a la tabla de procesos en ejecucion
-                for (int i = 0; i < proceso.getDuracion(); i++) {//para i iniciando en 0 hasta i menor al tiempo de rafaga de cpu, i aumenta en 1
-                    timer++;//variable timer aumenta en uno
-                    this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
-                    try {
-                        Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(FifoView.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
+                if(super.getPendiente().getRowCount()>0 || super.getEjecutando().getRowCount()>0){
+                    if(super.getEjecutando().getRowCount() > 0){
+                        proceso = super.getEjecutando().getProceso(0);
+                    }else{
+                        proceso = super.getPendiente().getProceso(0);//carga proceso de la tabla pendiente a la variable proceso
+                        super.getPendiente().removeRow(0);//una vez cargado el proceso se remueva de la tabla pendiente
+                        super.getEjecutando().addRow(proceso);//se envia el proceso a la tabla de procesos en ejecucion
                     }
-                }
-                super.getEjecutando().removeRow(0);//sacamos el proceso de la tabla procesos en ejecucion
-                super.getListo().addRow(proceso);//cargamos el proceso en la tabla procesos terminados
-                super.getProcesoByID(proceso.getId()).finalizar();
-                
+                    timer++;//variable timer aumenta en uno
+                    proceso.calcularDuracionRestante(1);
+                    //for (int i = 0; i < proceso.getDuracion(); i++){//para i iniciando en 0 hasta i menor al tiempo de rafaga de cpu, i aumenta en 1
+                        this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                        try {
+                            Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(FifoView.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
+                        }
+                    //}
+                    if(proceso.getDuracionRestante()<=0){
+                        super.getEjecutando().removeRow(0);//sacamos el proceso de la tabla procesos en ejecucion
+                        super.getListo().addRow(proceso);//cargamos el proceso en la tabla procesos terminados
+                        super.getProcesoByID(proceso.getId()).finalizar();
+                    }
+                    
             }
                 else{
                     timer++;
