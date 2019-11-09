@@ -59,6 +59,17 @@ public class Algoritmo {
     public ArrayList<Proceso> getProcesos() {
         return procesos;
     }
+    
+    public boolean todosFinalizados(){
+        boolean bandera = true;
+        int i=0;
+        for (Proceso proceso : this.getProcesos()) {
+            if(!proceso.isFinalizado()){
+                bandera = false;
+            }
+        }
+        return bandera;
+    }
 
     public void setProcesos(ArrayList<Proceso> procesos) {
         this.procesos = procesos;
@@ -113,4 +124,16 @@ public class Algoritmo {
     public void setListo(ProcesoTableModel listo) {
         this.listo = listo;
     }
+    
+    public Proceso getProcesoByID(int ID){
+        Proceso proceso = new Proceso();
+        for (Proceso procesoAux : this.getProcesos()) {
+            if(procesoAux.getId()==ID){
+                proceso = procesoAux;
+            }
+        }
+        return proceso;
+    }
+
+    
 }
