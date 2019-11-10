@@ -71,6 +71,8 @@ public class FIFO extends Algoritmo implements Runnable{
                     }
                     timer++;//variable timer aumenta en uno
                     proceso.calcularDuracionRestante(1);
+                    super.getEjecutando().removeRow(0);
+                    super.getEjecutando().addRow(proceso);//se envia el proceso a la tabla de procesos en ejecucion
                     //for (int i = 0; i < proceso.getDuracion(); i++){//para i iniciando en 0 hasta i menor al tiempo de rafaga de cpu, i aumenta en 1
                         this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                         try {
@@ -96,5 +98,6 @@ public class FIFO extends Algoritmo implements Runnable{
                     }
                 }
         }
+            super.resetProcesos();
      }
 }

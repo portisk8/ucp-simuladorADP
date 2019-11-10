@@ -1,5 +1,6 @@
 package clases;
 import com.ucp.simuladoradp.main.FifoView;
+import com.ucp.simuladoradp.main.SPNView;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -10,24 +11,32 @@ import java.util.logging.Logger;
  * @author sala 23 - pcs 16
  */
 public class SPN extends Algoritmo implements Runnable{
+
+    /**
+     * @return the spnView
+     */
+    public SPNView getSpnView() {
+        return spnView;
+    }
+
+    /**
+     * @param spnView the spnView to set
+     */
+    public void setSpnView(SPNView spnView) {
+        this.spnView = spnView;
+    }
     
+    private SPNView spnView;
     
-    public SPN(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos){
+    public SPN(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, SPNView spnView){
         super(nombre, caracteristicas, ventaja);
         Collections.sort(procesos);
         super.setPendiente(new ProcesoTableModel(procesos));
         super.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
         super.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
         this.setProcesos(procesos);
-        
+        this.setSpnView(spnView);
     }
-    
-    public SPN(String nombre, String caracteristicas, String funcion, String ventaja, Proceso proceso){
-        super(nombre, caracteristicas, ventaja);
-        this.setProcesos(new ArrayList<Proceso>());
-        this.agregarProceso(proceso);
-    }
-    
     public boolean agregarProceso(Proceso proceso){
         return this.getProcesos().add(proceso);
     }
@@ -59,8 +68,10 @@ public class SPN extends Algoritmo implements Runnable{
                     }
                     timer++;//variable timer aumenta en uno
                     proceso.calcularDuracionRestante(1);
+                    super.getEjecutando().removeRow(0);
+                    super.getEjecutando().addRow(proceso);//se envia el proceso a la tabla de procesos en ejecucion
                     //for (int i = 0; i < proceso.getDuracion(); i++){//para i iniciando en 0 hasta i menor al tiempo de rafaga de cpu, i aumenta en 1
-                        //this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                        this.spnView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                         try {
                             Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                         } catch (InterruptedException ex) {
@@ -76,7 +87,7 @@ public class SPN extends Algoritmo implements Runnable{
             }
                 else{
                     timer++;
-                    //this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                    this.spnView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                     try {
                         Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                     } catch (InterruptedException ex) {

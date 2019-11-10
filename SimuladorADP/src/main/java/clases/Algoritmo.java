@@ -134,6 +134,13 @@ public class Algoritmo {
         }
         return proceso;
     }
+    
+    public void resetProcesos(){
+        for (Proceso proceso : this.getProcesos()) {
+            proceso.setDuracionRestante(proceso.getDuracion());
+            proceso.setFinalizado(false);
+        }
+    }
 
     
 }
