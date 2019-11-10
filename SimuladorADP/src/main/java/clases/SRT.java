@@ -52,8 +52,16 @@ public class SRT extends Algoritmo implements Runnable{
                     }
                 }
                 if(super.getPendiente().getRowCount()>0 || super.getEjecutando().getRowCount()>0){
-                    if((super.getEjecutando().getRowCount()>0)&&((super.getEjecutando().getProceso(0).getDuracionRestante() <
-                                super.getPendiente().getProceso(super.getPendiente().procesoMenorTiempoRestante()).getDuracionRestante())||(super.getPendiente().getRowCount()<1))){
+                    if((super.getEjecutando().getRowCount()>0)&&(super.getPendiente().getRowCount()==0)){
+                        proceso = super.getEjecutando().getProceso(0);
+                    }
+                    else if((super.getEjecutando().getRowCount()>0)&&((super.getEjecutando().getProceso(0).getDuracionRestante() <=
+                             super.getPendiente().getProceso(super.getPendiente().procesoMenorTiempoRestante()).getDuracionRestante()))){
+                        /*while(super.getPendiente().getProceso(super.getPendiente().procesoMenorTiempoRestante()).getId()!=super.getEjecutando().getProceso(0).getId()){
+                            proceso2 = super.getPendiente().getProceso(super.getPendiente().procesoMenorTiempoRestante());
+                            super.getPendiente().removeRow(super.getPendiente().procesoMenorTiempoRestante());
+                            super.getPendiente().addRow(proceso2);
+                        }*/
                         proceso = super.getEjecutando().getProceso(0);
                     }
                     else if((super.getEjecutando().getRowCount()>0)&&(super.getEjecutando().getProceso(0).getDuracionRestante() >
@@ -72,20 +80,17 @@ public class SRT extends Algoritmo implements Runnable{
                     }
                     timer++;//variable timer aumenta en uno
                     super.getEjecutando().getProceso(0).calcularDuracionRestante(1);
-                    //for (int i = 0; i < proceso.getDuracion(); i++){//para i iniciando en 0 hasta i menor al tiempo de rafaga de cpu, i aumenta en 1
                         //this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                         try {
                             Thread.sleep(3000);//el hilo queda en modo espera por 1 segundo
                         } catch (InterruptedException ex) {
                             Logger.getLogger(FifoView.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
                         }
-                    //}
                     if(proceso.getDuracionRestante()<=0){
                         super.getEjecutando().removeRow(0);//sacamos el proceso de la tabla procesos en ejecucion
                         super.getListo().addRow(proceso);//cargamos el proceso en la tabla procesos terminados
                         super.getProcesoByID(proceso.getId()).finalizar();
                     }
-                    
             }
                 else{
                     timer++;
