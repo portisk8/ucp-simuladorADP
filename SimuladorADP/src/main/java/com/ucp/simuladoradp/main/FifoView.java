@@ -5,12 +5,17 @@
  */
 package com.ucp.simuladoradp.main;
 
+import Util.Archivo;
 import clases.FIFO;
 import clases.Proceso;
 import clases.ProcesoTableModel;
+import clases.Simulacion;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -51,8 +56,12 @@ public class FifoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopUpMenuTable = new javax.swing.JPopupMenu();
+        jItemAgregarFila = new javax.swing.JMenuItem();
+        jItemEliminarFila = new javax.swing.JMenuItem();
+        jDialogFile = new javax.swing.JDialog();
+        jFileChooser = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -74,15 +83,60 @@ public class FifoView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
+        jItemAgregarFila.setText("Agregar Fila");
+        jItemAgregarFila.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jItemAgregarFilaMouseClicked(evt);
+            }
+        });
+        jItemAgregarFila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jItemAgregarFilaActionPerformed(evt);
+            }
+        });
+        jPopUpMenuTable.add(jItemAgregarFila);
+
+        jItemEliminarFila.setText("Eliminar Fila");
+        jItemEliminarFila.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jItemEliminarFilaMouseClicked(evt);
+            }
+        });
+        jItemEliminarFila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jItemEliminarFilaActionPerformed(evt);
+            }
+        });
+        jPopUpMenuTable.add(jItemEliminarFila);
+
+        javax.swing.GroupLayout jDialogFileLayout = new javax.swing.GroupLayout(jDialogFile.getContentPane());
+        jDialogFile.getContentPane().setLayout(jDialogFileLayout);
+        jDialogFileLayout.setHorizontalGroup(
+            jDialogFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialogFileLayout.setVerticalGroup(
+            jDialogFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Listado de Procesos"));
 
-        jButton1.setText("Nuevo Procesos");
-
         jButton2.setText("Exportar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Importar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTableProcesos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,6 +149,11 @@ public class FifoView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableProcesos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProcesosMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTableProcesos);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -121,10 +180,9 @@ public class FifoView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3))
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -133,10 +191,9 @@ public class FifoView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -339,6 +396,47 @@ public class FifoView extends javax.swing.JFrame {
         new Thread(fifo).start();
     }//GEN-LAST:event_jBtnIniciarActionPerformed
 
+    private void jTableProcesosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProcesosMouseClicked
+        // TODO add your handling code here:
+        if(evt.getButton() == 3){
+            jPopUpMenuTable.setLocation(evt.getLocationOnScreen());
+            jPopUpMenuTable.show(evt.getComponent(), evt.getX(), evt.getY());
+            jPopUpMenuTable.setVisible(true);            
+        }else{jPopUpMenuTable.setVisible(false);}
+    }//GEN-LAST:event_jTableProcesosMouseClicked
+
+    private void jItemAgregarFilaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jItemAgregarFilaMouseClicked
+        procesosTableModel.addRow(new Proceso());
+    }//GEN-LAST:event_jItemAgregarFilaMouseClicked
+
+    private void jItemAgregarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemAgregarFilaActionPerformed
+        // TODO add your handling code here:
+        procesosTableModel.addRow(new Proceso());
+    }//GEN-LAST:event_jItemAgregarFilaActionPerformed
+
+    private void jItemEliminarFilaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jItemEliminarFilaMouseClicked
+        // TODO add your handling code here:
+        procesosTableModel.addRow(new Proceso());
+    }//GEN-LAST:event_jItemEliminarFilaMouseClicked
+
+    private void jItemEliminarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemEliminarFilaActionPerformed
+        procesosTableModel.removeRow(jTableProcesos.getSelectedRow());
+    }//GEN-LAST:event_jItemEliminarFilaActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+            this.listProcess = Archivo.getProcesos();
+            procesosTableModel = new ProcesoTableModel(this.listProcess);
+            jTableProcesos.setModel(procesosTableModel);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(Archivo.grabarProcesos(this.listProcess)){
+            JOptionPane.showMessageDialog(null, "EXITO!");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -394,9 +492,12 @@ public class FifoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnIniciar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JDialog jDialogFile;
+    private javax.swing.JFileChooser jFileChooser;
+    private javax.swing.JMenuItem jItemAgregarFila;
+    private javax.swing.JMenuItem jItemEliminarFila;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -406,6 +507,7 @@ public class FifoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPopupMenu jPopUpMenuTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

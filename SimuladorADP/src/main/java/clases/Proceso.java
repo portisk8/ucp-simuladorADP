@@ -79,6 +79,7 @@ public class Proceso implements Comparable<Proceso>{
 
     public void setDuracion(double duracion) {
         this.duracion = duracion;
+        this.setDuracionRestante(duracion);
     }
     
     public void mostrar() {
