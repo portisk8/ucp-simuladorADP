@@ -5,6 +5,8 @@
  */
 package com.ucp.simuladoradp.main;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author porti
@@ -16,6 +18,8 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("Simulador de Algoritmos");
     }
 
     /**
@@ -45,10 +49,25 @@ public class Main extends javax.swing.JFrame {
         });
 
         jButton2.setText("SPN");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("SRT");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Round Robbin");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,8 +109,38 @@ public class Main extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         FifoView fv = new FifoView();
+        fv.setTitle("Algoritmo: FIFO");
+        fv.setLocationRelativeTo(null);
         fv.setVisible(true);
+        fv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        RRView view = new RRView();
+        view.setTitle("Algoritmo: Round Robin");
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+        view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        SPNView view = new SPNView();
+        view.setTitle("Algoritmo: SPN (Shortest Process Next)");
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+        view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        SRTView view = new SRTView();
+        view.setTitle("Algoritmo: SRT (Shortest Remaining Time)");
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+        view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

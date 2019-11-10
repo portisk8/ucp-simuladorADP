@@ -5,17 +5,47 @@
  */
 package com.ucp.simuladoradp.main;
 
+import Util.Archivo;
+import clases.FIFO;
+import clases.Proceso;
+import clases.ProcesoTableModel;
+import clases.SPN;
+import clases.Simulacion;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
 /**
  *
  * @author porti
  */
 public class SPNView extends javax.swing.JFrame {
 
+    
+    private ArrayList<Proceso> listProcess;//crea una lista de procesos
+    private SPN spn;//declara una variable fifo del tipo fifo
+    private ProcesoTableModel procesosTableModel;
+
     /**
-     * Creates new form SPNView
+     * Creates new form FifoView
      */
     public SPNView() {
         initComponents();
+        ArrayList<Proceso> listado = new ArrayList();
+       int orden = 10;
+       Random r = new Random();
+        for (int i = 0; i < 10; i++) {
+            Proceso p = new Proceso(i, "p"+i, orden, r.nextInt((6 - 1) + 1) + 1);
+            orden--;
+            listado.add(p);
+        }
+        listProcess = listado;
+        procesosTableModel = new ProcesoTableModel(listado);
+        jTableProcesos.setModel(procesosTableModel);
     }
 
     /**
@@ -27,21 +57,386 @@ public class SPNView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopUpMenuTable = new javax.swing.JPopupMenu();
+        jItemAgregarFila = new javax.swing.JMenuItem();
+        jItemEliminarFila = new javax.swing.JMenuItem();
+        jDialogFile = new javax.swing.JDialog();
+        jFileChooser = new javax.swing.JFileChooser();
+        jPanel1 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableProcesos = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableProcesosEspera = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableProcesoEnCurso = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableProcesosTerminados = new javax.swing.JTable();
+        jBtnIniciar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        timerCpu = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
+        jItemAgregarFila.setText("Agregar Fila");
+        jItemAgregarFila.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jItemAgregarFilaMouseClicked(evt);
+            }
+        });
+        jItemAgregarFila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jItemAgregarFilaActionPerformed(evt);
+            }
+        });
+        jPopUpMenuTable.add(jItemAgregarFila);
+
+        jItemEliminarFila.setText("Eliminar Fila");
+        jItemEliminarFila.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jItemEliminarFilaMouseClicked(evt);
+            }
+        });
+        jItemEliminarFila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jItemEliminarFilaActionPerformed(evt);
+            }
+        });
+        jPopUpMenuTable.add(jItemEliminarFila);
+
+        javax.swing.GroupLayout jDialogFileLayout = new javax.swing.GroupLayout(jDialogFile.getContentPane());
+        jDialogFile.getContentPane().setLayout(jDialogFileLayout);
+        jDialogFileLayout.setHorizontalGroup(
+            jDialogFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialogFileLayout.setVerticalGroup(
+            jDialogFileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Listado de Procesos"));
+
+        jButton2.setText("Exportar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Importar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jTableProcesos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTableProcesos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProcesosMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTableProcesos);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
+
+        jTableProcesosEspera.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableProcesosEspera);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
+
+        jTableProcesoEnCurso.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableProcesoEnCurso);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
+
+        jTableProcesosTerminados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTableProcesosTerminados);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jBtnIniciar.setText("I N I C I A R");
+        jBtnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnIniciarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel4.setText("Rafaga CPU (seg)");
+
+        timerCpu.setFont(new java.awt.Font("Verdana", 0, 48)); // NOI18N
+        timerCpu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timerCpu.setText("0");
+        timerCpu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 179, 20));
+        jLabel2.setText("Procesos en Espera");
+        jLabel2.setToolTipText("");
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 179, 20));
+        jLabel1.setText("Proceso en Ejecucion");
+        jLabel1.setToolTipText("");
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 179, 20));
+        jLabel3.setText("Procesos Terminados");
+        jLabel3.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(96, 96, 96)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(timerCpu, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jBtnIniciar)
+                                                .addGap(24, 24, 24))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(timerCpu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBtnIniciar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBtnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIniciarActionPerformed
+        // TODO add your handling code here:
+        //spn = new SPN("Fifo", "Caracteristicas", "Ventajas", listProcess, this);
+        //new Thread(spn).start();
+    }//GEN-LAST:event_jBtnIniciarActionPerformed
+
+    private void jTableProcesosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProcesosMouseClicked
+        // TODO add your handling code here:
+        if(evt.getButton() == 3){
+            jPopUpMenuTable.setLocation(evt.getLocationOnScreen());
+            jPopUpMenuTable.show(evt.getComponent(), evt.getX(), evt.getY());
+            jPopUpMenuTable.setVisible(true);            
+        }else{jPopUpMenuTable.setVisible(false);}
+    }//GEN-LAST:event_jTableProcesosMouseClicked
+
+    private void jItemAgregarFilaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jItemAgregarFilaMouseClicked
+        procesosTableModel.addRow(new Proceso());
+    }//GEN-LAST:event_jItemAgregarFilaMouseClicked
+
+    private void jItemAgregarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemAgregarFilaActionPerformed
+        // TODO add your handling code here:
+        procesosTableModel.addRow(new Proceso());
+    }//GEN-LAST:event_jItemAgregarFilaActionPerformed
+
+    private void jItemEliminarFilaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jItemEliminarFilaMouseClicked
+        // TODO add your handling code here:
+        procesosTableModel.addRow(new Proceso());
+    }//GEN-LAST:event_jItemEliminarFilaMouseClicked
+
+    private void jItemEliminarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemEliminarFilaActionPerformed
+        procesosTableModel.removeRow(jTableProcesos.getSelectedRow());
+    }//GEN-LAST:event_jItemEliminarFilaActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+            this.listProcess = Archivo.getProcesos();
+            procesosTableModel = new ProcesoTableModel(this.listProcess);
+            jTableProcesos.setModel(procesosTableModel);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(Archivo.grabarProcesos(this.listProcess)){
+            JOptionPane.showMessageDialog(null, "EXITO!");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -69,6 +464,7 @@ public class SPNView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(SPNView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -77,7 +473,51 @@ public class SPNView extends javax.swing.JFrame {
             }
         });
     }
+    
+     /**geters y seters*/
+    public JTable getjTableProcesoEnCurso() {
+        return jTableProcesoEnCurso;
+    }
+
+    public JTable getjTableProcesosEspera() {
+        return jTableProcesosEspera;
+    }
+
+    public JTable getjTableProcesosTerminados() {
+        return jTableProcesosTerminados;
+    }
+
+    public JLabel getTimerCpu() {
+        return timerCpu;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnIniciar;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JDialog jDialogFile;
+    private javax.swing.JFileChooser jFileChooser;
+    private javax.swing.JMenuItem jItemAgregarFila;
+    private javax.swing.JMenuItem jItemEliminarFila;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPopupMenu jPopUpMenuTable;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTableProcesoEnCurso;
+    private javax.swing.JTable jTableProcesos;
+    private javax.swing.JTable jTableProcesosEspera;
+    private javax.swing.JTable jTableProcesosTerminados;
+    private javax.swing.JLabel timerCpu;
     // End of variables declaration//GEN-END:variables
 }
