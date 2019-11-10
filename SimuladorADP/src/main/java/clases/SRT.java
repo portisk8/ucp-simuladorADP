@@ -52,11 +52,12 @@ public class SRT extends Algoritmo implements Runnable{
                     }
                 }
                 if(super.getPendiente().getRowCount()>0 || super.getEjecutando().getRowCount()>0){
-                    if((super.getEjecutando().getRowCount()>0)&&(super.getEjecutando().getProceso(0).getDuracionRestante() <
-                                super.getPendiente().getProceso(super.getPendiente().procesoMenorTiempoRestante()).getDuracionRestante())){
+                    if((super.getEjecutando().getRowCount()>0)&&((super.getEjecutando().getProceso(0).getDuracionRestante() <
+                                super.getPendiente().getProceso(super.getPendiente().procesoMenorTiempoRestante()).getDuracionRestante())||(super.getPendiente().getRowCount()<1))){
                         proceso = super.getEjecutando().getProceso(0);
                     }
-                    else if(super.getEjecutando().getRowCount()>0){
+                    else if((super.getEjecutando().getRowCount()>0)&&(super.getEjecutando().getProceso(0).getDuracionRestante() >
+                                super.getPendiente().getProceso(super.getPendiente().procesoMenorTiempoRestante()).getDuracionRestante())){
                         proceso = super.getPendiente().getProceso(super.getPendiente().procesoMenorTiempoRestante());//carga proceso de la tabla pendiente a la variable proceso
                         proceso2 = super.getEjecutando().getProceso(0);
                         super.getEjecutando().removeRow(0);
@@ -70,7 +71,7 @@ public class SRT extends Algoritmo implements Runnable{
                        super.getEjecutando().addRow(proceso);//se envia el proceso a la tabla de procesos en ejecucion
                     }
                     timer++;//variable timer aumenta en uno
-                    proceso.calcularDuracionRestante(1);
+                    super.getEjecutando().getProceso(0).calcularDuracionRestante(1);
                     //for (int i = 0; i < proceso.getDuracion(); i++){//para i iniciando en 0 hasta i menor al tiempo de rafaga de cpu, i aumenta en 1
                         //this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                         try {
@@ -96,5 +97,6 @@ public class SRT extends Algoritmo implements Runnable{
                 }
             }
         }
+            super.resetProcesos();
     }
 }
