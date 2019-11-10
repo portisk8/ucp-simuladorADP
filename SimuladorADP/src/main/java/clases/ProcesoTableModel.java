@@ -14,10 +14,10 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ProcesoTableModel extends AbstractTableModel{
     
-    private String[] columnNames = {"[ ]","Proceso","Instante Entrada", "Tiempo Ejecucion"}; 
+    private String[] columnNames = {"[ ]","Proceso","Instante Entrada", "Tiempo Ejecucion", "Tiempo Restante"}; 
     private ArrayList<Proceso> listProcess;
     private final Class[] columnClass = new Class[] {
-        Boolean.class, String.class, Double.class, Double.class
+        Boolean.class, String.class, Double.class, Double.class, Double.class
     };
      public ProcesoTableModel(ArrayList<Proceso> listProcess) { 
       this.listProcess = listProcess; 
@@ -58,6 +58,9 @@ public class ProcesoTableModel extends AbstractTableModel{
       } else if (col == 3) { 
          temp = new Double(getListProcess().get(row).getDuracion()); 
       } 
+      else if (col == 4) { 
+         temp = new Double(getListProcess().get(row).getDuracionRestante()); 
+      } 
       return temp; 
     }
     
@@ -77,6 +80,9 @@ public class ProcesoTableModel extends AbstractTableModel{
        else if(3 == columnIndex) {
            row.setDuracion((double) aValue);
        }
+       else if(3 == columnIndex) {
+           row.setDuracionRestante((double) aValue);
+       } 
    }
    
    @Override
@@ -143,7 +149,18 @@ public boolean isCellEditable(int rowIndex, int columnIndex)
         
     }
     
-    
+    public int procesoMenorTiempoRestante(){
+        double min = Double.MAX_VALUE;
+        int i=0, indice=0;
+        for (Proceso procesoAux : this.getListProcess()) {
+            if(procesoAux.getDuracionRestante()<min){
+                min = procesoAux.getDuracion();
+                indice=i;
+            }
+            i++;
+        }
+        return indice; 
+    }
 
     /**
      * @return the listProcess
