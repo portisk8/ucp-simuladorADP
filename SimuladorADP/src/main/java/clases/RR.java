@@ -1,5 +1,7 @@
 package clases;
 import com.ucp.simuladoradp.main.FifoView;
+import com.ucp.simuladoradp.main.RRView;
+import com.ucp.simuladoradp.main.SRTView;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -8,6 +10,22 @@ import java.util.logging.Logger;
 
 public class RR extends Algoritmo implements Runnable{
     
+    
+    /**
+     * @return the spnView
+     */
+    public RRView getRRView() {
+        return rrView;
+    }
+
+    /**
+     * @param spnView the spnView to set
+     */
+    public void setRRView(RRView rrView) {
+        this.rrView = rrView;
+    }
+    
+    private RRView rrView;
     private int quanto;
     
     
@@ -28,6 +46,19 @@ public class RR extends Algoritmo implements Runnable{
         this.agregarProceso(proceso);
     }
     
+    public RR(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, RRView rrView){
+        super(nombre, caracteristicas, ventaja);
+        Collections.sort(procesos);
+        super.setPendiente(new ProcesoTableModel(procesos));
+        super.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
+        super.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
+        this.setProcesos(procesos);
+        this.setRRView(rrView);
+        this.rrView.getjTableProcesosEspera().setModel(super.getPendiente());
+        this.rrView.getjTableProcesoEnCurso().setModel(super.getEjecutando());
+        this.rrView.getjTableProcesosTerminados().setModel(super.getListo());
+    }
+    
     public boolean agregarProceso(Proceso proceso){
         return this.getProcesos().add(proceso);
     }
@@ -38,7 +69,7 @@ public class RR extends Algoritmo implements Runnable{
 
     public void run() {
             Proceso proceso, proceso2;//creamos un proceso de la clase proceso
-            //this.fifoView.getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
+            this.getRRView().getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
             
             int timer = 0, tiempoDisponible = 0;//creamos una variable timer con inicializacion cero (0)
             
@@ -71,7 +102,7 @@ public class RR extends Algoritmo implements Runnable{
                     timer++;//variable timer aumenta en uno
                     tiempoDisponible++;
                     super.getEjecutando().getProceso(0).calcularDuracionRestante(1);
-                        //this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                        this.getRRView().getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                         try {
                             Thread.sleep(3000);//el hilo queda en modo espera por 1 segundo
                         } catch (InterruptedException ex) {
@@ -85,7 +116,7 @@ public class RR extends Algoritmo implements Runnable{
             }
                 else{
                     timer++;
-                    //this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                    this.getRRView().getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                     try {
                         Thread.sleep(3000);//el hilo queda en modo espera por 1 segundo
                     } catch (InterruptedException ex) {

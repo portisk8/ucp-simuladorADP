@@ -1,6 +1,8 @@
 
 package clases;
 import com.ucp.simuladoradp.main.FifoView;
+import com.ucp.simuladoradp.main.SPNView;
+import com.ucp.simuladoradp.main.SRTView;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -13,7 +15,21 @@ import java.util.logging.Logger;
 public class SRT extends Algoritmo implements Runnable{
     
     
+    /**
+     * @return the spnView
+     */
+    public SRTView getSpnView() {
+        return srtView;
+    }
+
+    /**
+     * @param spnView the spnView to set
+     */
+    public void setSRTView(SRTView srtView) {
+        this.srtView = srtView;
+    }
     
+    private SRTView srtView;
     
     public SRT(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos){
         super(nombre, caracteristicas, ventaja);
@@ -31,6 +47,19 @@ public class SRT extends Algoritmo implements Runnable{
         this.agregarProceso(proceso);
     }
     
+    public SRT(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, SRTView srtView){
+        super(nombre, caracteristicas, ventaja);
+        Collections.sort(procesos);
+        super.setPendiente(new ProcesoTableModel(procesos));
+        super.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
+        super.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
+        this.setProcesos(procesos);
+        this.setSRTView(srtView);
+        this.srtView.getjTableProcesosEspera().setModel(super.getPendiente());
+        this.srtView.getjTableProcesoEnCurso().setModel(super.getEjecutando());
+        this.srtView.getjTableProcesosTerminados().setModel(super.getListo());
+    }
+    
     public boolean agregarProceso(Proceso proceso){
         return this.getProcesos().add(proceso);
     }
@@ -41,7 +70,7 @@ public class SRT extends Algoritmo implements Runnable{
 
     public void run() {
             Proceso proceso, proceso2;//creamos un proceso de la clase proceso
-            //this.fifoView.getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
+            this.getSpnView().getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
             
             int timer = 0;//creamos una variable timer con inicializacion cero (0)
             
@@ -80,7 +109,7 @@ public class SRT extends Algoritmo implements Runnable{
                     }
                     timer++;//variable timer aumenta en uno
                     super.getEjecutando().getProceso(0).calcularDuracionRestante(1);
-                        //this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                        this.getSpnView().getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                         try {
                             Thread.sleep(3000);//el hilo queda en modo espera por 1 segundo
                         } catch (InterruptedException ex) {
@@ -94,7 +123,7 @@ public class SRT extends Algoritmo implements Runnable{
             }
                 else{
                     timer++;
-                    //this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                    this.getSpnView().getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                     try {
                         Thread.sleep(3000);//el hilo queda en modo espera por 1 segundo
                     } catch (InterruptedException ex) {

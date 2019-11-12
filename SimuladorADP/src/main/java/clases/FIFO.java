@@ -28,8 +28,6 @@ public class FIFO extends Algoritmo implements Runnable{
         super.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
         super.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
         super.setProcesos(procesos);
-        
-        
         this.fifoView.getjTableProcesosEspera().setModel(super.getPendiente());
         this.fifoView.getjTableProcesoEnCurso().setModel(super.getEjecutando());
         this.fifoView.getjTableProcesosTerminados().setModel(super.getListo());

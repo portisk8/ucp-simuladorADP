@@ -393,8 +393,8 @@ public class SPNView extends javax.swing.JFrame {
 
     private void jBtnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIniciarActionPerformed
         // TODO add your handling code here:
-        //spn = new SPN("Fifo", "Caracteristicas", "Ventajas", listProcess, this);
-        //new Thread(spn).start();
+        spn = new SPN("Fifo", "Caracteristicas", "Ventajas", procesosTableModel.getSelectedRows(), this);
+        new Thread(spn).start();
     }//GEN-LAST:event_jBtnIniciarActionPerformed
 
     private void jTableProcesosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProcesosMouseClicked

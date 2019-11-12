@@ -36,6 +36,9 @@ public class SPN extends Algoritmo implements Runnable{
         super.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
         this.setProcesos(procesos);
         this.setSpnView(spnView);
+        this.spnView.getjTableProcesosEspera().setModel(super.getPendiente());
+        this.spnView.getjTableProcesoEnCurso().setModel(super.getEjecutando());
+        this.spnView.getjTableProcesosTerminados().setModel(super.getListo());
     }
     public boolean agregarProceso(Proceso proceso){
         return this.getProcesos().add(proceso);
@@ -48,12 +51,12 @@ public class SPN extends Algoritmo implements Runnable{
     
     public void run() {
             Proceso proceso;//creamos un proceso de la clase proceso
-            //this.spnView.getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
+            this.spnView.getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
             
             int timer = 0;//creamos una variable timer con inicializacion cero (0)
             
             while(!super.todosFinalizados()){//mientras haya procesos en la tabla de pendientes por atender
-                for (Proceso procesoActual : super.getProcesos()) {
+                for (Proceso procesoActual : super.getProcesos()){
                     if(procesoActual.getInstante_entrada()==timer){
                         super.getPendiente().addRow(procesoActual);
                     }
