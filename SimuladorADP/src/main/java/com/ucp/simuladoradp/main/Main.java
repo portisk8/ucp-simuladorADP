@@ -108,16 +108,18 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        FifoView fv = new FifoView();
-        fv.setTitle("Algoritmo: FIFO");
-        fv.setLocationRelativeTo(null);
-        fv.setVisible(true);
-        fv.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        VentanaSimulacion view = new VentanaSimulacion("FIFO");
+        view.ocltarLabel();
+        view.ocltarTextBox();
+        view.setTitle("Algoritmo: FIFO");
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+        view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        RRView view = new RRView();
+        VentanaSimulacion view = new VentanaSimulacion("RR");
         view.setTitle("Algoritmo: Round Robin");
         view.setLocationRelativeTo(null);
         view.setVisible(true);
@@ -126,7 +128,9 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        SPNView view = new SPNView();
+        VentanaSimulacion view = new VentanaSimulacion("SPN");
+        view.ocltarLabel();
+        view.ocltarTextBox();
         view.setTitle("Algoritmo: SPN (Shortest Process Next)");
         view.setLocationRelativeTo(null);
         view.setVisible(true);
@@ -135,7 +139,9 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        SRTView view = new SRTView();
+        VentanaSimulacion view = new VentanaSimulacion("SRT");
+        view.ocltarLabel();
+        view.ocltarTextBox();
         view.setTitle("Algoritmo: SRT (Shortest Remaining Time)");
         view.setLocationRelativeTo(null);
         view.setVisible(true);

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package clases;
-import com.ucp.simuladoradp.main.FifoView;
+import com.ucp.simuladoradp.main.VentanaSimulacion;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -14,13 +14,13 @@ import java.util.logging.Logger;
  *
  * @author sala 23 - pcs 16
  */
-public class FIFO extends Algoritmo implements Runnable{
+public class FIFO extends Algoritmo {
     
     
-    private FifoView fifoView;
+    private VentanaSimulacion fifoView; //Se implementa por variable instancia debido a una necesidad de actualizacion de interfaz para la simulacion.
     
     
-    public FIFO(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, FifoView fifoView){
+    public FIFO(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, VentanaSimulacion fifoView){
         super(nombre, caracteristicas, ventaja);
         this.fifoView = fifoView;
         Collections.sort(procesos);
@@ -76,7 +76,7 @@ public class FIFO extends Algoritmo implements Runnable{
                         try {
                             Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                         } catch (InterruptedException ex) {
-                            Logger.getLogger(FifoView.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
+                            Logger.getLogger(VentanaSimulacion.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
                         }
                     //}
                     if(proceso.getDuracionRestante()<=0){
@@ -92,7 +92,7 @@ public class FIFO extends Algoritmo implements Runnable{
                     try {
                         Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(FifoView.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
+                        Logger.getLogger(VentanaSimulacion.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
                     }
                 }
         }

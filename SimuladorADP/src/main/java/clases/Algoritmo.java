@@ -3,7 +3,7 @@ package clases;
 import java.util.*;
 
 
-public class Algoritmo {
+public class Algoritmo extends Thread{
     private String nombre;
     private String caracteristicas;
     private String ventaja;

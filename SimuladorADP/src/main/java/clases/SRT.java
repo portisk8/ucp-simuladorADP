@@ -1,8 +1,10 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package clases;
-import com.ucp.simuladoradp.main.FifoView;
-import com.ucp.simuladoradp.main.SPNView;
-import com.ucp.simuladoradp.main.SRTView;
+import com.ucp.simuladoradp.main.VentanaSimulacion;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -12,52 +14,29 @@ import java.util.logging.Logger;
  *
  * @author sala 23 - pcs 16
  */
-public class SRT extends Algoritmo implements Runnable{
+public class SRT extends Algoritmo {
     
     
-    /**
-     * @return the spnView
-     */
-    public SRTView getSpnView() {
-        return srtView;
-    }
-
-    /**
-     * @param spnView the spnView to set
-     */
-    public void setSRTView(SRTView srtView) {
-        this.srtView = srtView;
-    }
+    private VentanaSimulacion fifoView; //Se implementa por variable instancia debido a una necesidad de actualizacion de interfaz para la simulacion.
     
-    private SRTView srtView;
     
-    public SRT(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos){
+    public SRT(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, VentanaSimulacion fifoView){
         super(nombre, caracteristicas, ventaja);
+        this.fifoView = fifoView;
         Collections.sort(procesos);
-        super.setPendiente(new ProcesoTableModel(procesos));
+        super.setPendiente(new ProcesoTableModel(new ArrayList<Proceso>()));
         super.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
         super.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
-        this.setProcesos(procesos);
-        
+        super.setProcesos(procesos);
+        this.fifoView.getjTableProcesosEspera().setModel(super.getPendiente());
+        this.fifoView.getjTableProcesoEnCurso().setModel(super.getEjecutando());
+        this.fifoView.getjTableProcesosTerminados().setModel(super.getListo());
     }
     
     public SRT(String nombre, String caracteristicas, String funcion, String ventaja, Proceso proceso){
         super(nombre, caracteristicas, ventaja);
         this.setProcesos(new ArrayList<Proceso>());
         this.agregarProceso(proceso);
-    }
-    
-    public SRT(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, SRTView srtView){
-        super(nombre, caracteristicas, ventaja);
-        Collections.sort(procesos);
-        super.setPendiente(new ProcesoTableModel(procesos));
-        super.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
-        super.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
-        this.setProcesos(procesos);
-        this.setSRTView(srtView);
-        this.srtView.getjTableProcesosEspera().setModel(super.getPendiente());
-        this.srtView.getjTableProcesoEnCurso().setModel(super.getEjecutando());
-        this.srtView.getjTableProcesosTerminados().setModel(super.getListo());
     }
     
     public boolean agregarProceso(Proceso proceso){
@@ -70,7 +49,7 @@ public class SRT extends Algoritmo implements Runnable{
 
     public void run() {
             Proceso proceso, proceso2;//creamos un proceso de la clase proceso
-            this.getSpnView().getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
+            this.fifoView.getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
             
             int timer = 0;//creamos una variable timer con inicializacion cero (0)
             
@@ -109,11 +88,11 @@ public class SRT extends Algoritmo implements Runnable{
                     }
                     timer++;//variable timer aumenta en uno
                     super.getEjecutando().getProceso(0).calcularDuracionRestante(1);
-                        this.getSpnView().getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                        this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                         try {
-                            Thread.sleep(3000);//el hilo queda en modo espera por 1 segundo
+                            Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                         } catch (InterruptedException ex) {
-                            Logger.getLogger(FifoView.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
+                            Logger.getLogger(VentanaSimulacion.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
                         }
                     if(proceso.getDuracionRestante()<=0){
                         super.getEjecutando().removeRow(0);//sacamos el proceso de la tabla procesos en ejecucion
@@ -123,11 +102,11 @@ public class SRT extends Algoritmo implements Runnable{
             }
                 else{
                     timer++;
-                    this.getSpnView().getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                    this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                     try {
-                        Thread.sleep(3000);//el hilo queda en modo espera por 1 segundo
+                        Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(FifoView.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
+                        Logger.getLogger(VentanaSimulacion.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
                 }
             }
         }

@@ -7,9 +7,11 @@ package com.ucp.simuladoradp.main;
 
 import Util.Archivo;
 import clases.FIFO;
+import clases.RR;
+import clases.SPN;
+import clases.SRT;
 import clases.Proceso;
 import clases.ProcesoTableModel;
-import clases.SRT;
 import clases.Simulacion;
 import java.io.File;
 import java.util.ArrayList;
@@ -23,17 +25,34 @@ import javax.swing.JTable;
  *
  * @author porti
  */
-public class SRTView extends javax.swing.JFrame {
+public class VentanaSimulacion extends javax.swing.JFrame {
 
     
     private ArrayList<Proceso> listProcess;//crea una lista de procesos
-    private SRT srt;//declara una variable fifo del tipo fifo
     private ProcesoTableModel procesosTableModel;
+    private String planificador;
+    private int nuevoQanto;
 
     /**
      * Creates new form FifoView
      */
-    public SRTView() {
+    public VentanaSimulacion(String planificador) {
+        initComponents();
+        ArrayList<Proceso> listado = new ArrayList();
+       int orden = 10;
+       Random r = new Random();
+        for (int i = 0; i < 10; i++) {
+            Proceso p = new Proceso(i, "p"+i, orden, r.nextInt((6 - 1) + 1) + 1);
+            orden--;
+            listado.add(p);
+        }
+        listProcess = listado;
+        procesosTableModel = new ProcesoTableModel(listado);
+        jTableProcesos.setModel(procesosTableModel);
+        this.setPlanificador(planificador);
+    }
+    
+    public VentanaSimulacion() {
         initComponents();
         ArrayList<Proceso> listado = new ArrayList();
        int orden = 10;
@@ -68,6 +87,10 @@ public class SRTView extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableProcesos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProcesosEspera = new javax.swing.JTable();
@@ -150,6 +173,7 @@ public class SRTView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableProcesos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jTableProcesos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableProcesosMouseClicked(evt);
@@ -169,10 +193,33 @@ public class SRTView extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
+
+        jButton1.setText("Seleccionar Todo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Deseleccionar Todo");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setText("1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Ingrese un quanto deseado:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,22 +227,40 @@ public class SRTView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)))
+                .addGap(144, 144, 144)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3)
+                            .addComponent(jButton1)
+                            .addComponent(jButton4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -227,8 +292,8 @@ public class SRTView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
@@ -259,8 +324,8 @@ public class SRTView extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
@@ -291,8 +356,8 @@ public class SRTView extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jBtnIniciar.setText("I N I C I A R");
@@ -393,8 +458,30 @@ public class SRTView extends javax.swing.JFrame {
 
     private void jBtnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIniciarActionPerformed
         // TODO add your handling code here:
-        srt = new SRT("Fifo", "Caracteristicas", "Ventajas", listProcess, this);
-        new Thread(srt).start();
+        switch(this.getPlanificador()){
+            case "FIFO":
+                FIFO fifo = new FIFO("Fifo", "Caracteristicas", "Ventajas", procesosTableModel.getSelectedRows(), this);
+                fifo.start();
+                break;
+                
+            case "SPN":
+                SPN spn = new SPN("SPN", "Caracteristicas", "Ventajas", procesosTableModel.getSelectedRows(), this);
+                spn.start();
+                break;
+                
+            case "RR":
+                int valor = Integer.parseInt(this.jTextField1.getText());
+                RR rr = new RR("RR", "Caracteristicas", "Ventajas", procesosTableModel.getSelectedRows(), this, valor);
+                rr.start();
+                break;
+                
+            case "SRT":
+                SRT srt = new SRT("SRT", "Caracteristicas", "Ventajas", procesosTableModel.getSelectedRows(), this);
+                srt.start();
+                break;
+        
+        }
+        
     }//GEN-LAST:event_jBtnIniciarActionPerformed
 
     private void jTableProcesosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProcesosMouseClicked
@@ -438,6 +525,24 @@ public class SRTView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < this.procesosTableModel.getRowCount(); i++) {
+            jTableProcesos.getModel().setValueAt(true, i, 0);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < this.procesosTableModel.getRowCount(); i++) {
+            jTableProcesos.getModel().setValueAt(false, i, 0);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -455,21 +560,20 @@ public class SRTView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SRTView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaSimulacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SRTView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaSimulacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SRTView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaSimulacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SRTView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaSimulacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SRTView().setVisible(true);
+                new VentanaSimulacion().setVisible(true);
             }
         });
     }
@@ -491,11 +595,22 @@ public class SRTView extends javax.swing.JFrame {
         return timerCpu;
     }
 
+   
+    
+    public void ocltarTextBox(){
+        jTextField1.setVisible(false);
+    }
+    
+    public void ocltarLabel(){
+        jLabel5.setVisible(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnIniciar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JDialog jDialogFile;
     private javax.swing.JFileChooser jFileChooser;
     private javax.swing.JMenuItem jItemAgregarFila;
@@ -504,6 +619,7 @@ public class SRTView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -518,6 +634,23 @@ public class SRTView extends javax.swing.JFrame {
     private javax.swing.JTable jTableProcesos;
     private javax.swing.JTable jTableProcesosEspera;
     private javax.swing.JTable jTableProcesosTerminados;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel timerCpu;
     // End of variables declaration//GEN-END:variables
+
+    public String getPlanificador() {
+        return planificador;
+    }
+
+    private void setPlanificador(String planificador) {
+        this.planificador = planificador;
+    }
+
+    public int getNuevoQanto() {
+        return nuevoQanto;
+    }
+
+    public void setNuevoQanto(int nuevoQanto) {
+        this.nuevoQanto = nuevoQanto;
+    }
 }

@@ -1,6 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package clases;
-import com.ucp.simuladoradp.main.FifoView;
-import com.ucp.simuladoradp.main.SPNView;
+import com.ucp.simuladoradp.main.VentanaSimulacion;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -10,36 +14,31 @@ import java.util.logging.Logger;
  *
  * @author sala 23 - pcs 16
  */
-public class SPN extends Algoritmo implements Runnable{
-
-    /**
-     * @return the spnView
-     */
-    public SPNView getSpnView() {
-        return spnView;
-    }
-
-    /**
-     * @param spnView the spnView to set
-     */
-    public void setSpnView(SPNView spnView) {
-        this.spnView = spnView;
-    }
+public class SPN extends Algoritmo {
     
-    private SPNView spnView;
     
-    public SPN(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, SPNView spnView){
+    private VentanaSimulacion fifoView; //Se implementa por variable instancia debido a una necesidad de actualizacion de interfaz para la simulacion.
+    
+    
+    public SPN(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, VentanaSimulacion fifoView){
         super(nombre, caracteristicas, ventaja);
+        this.fifoView = fifoView;
         Collections.sort(procesos);
-        super.setPendiente(new ProcesoTableModel(procesos));
+        super.setPendiente(new ProcesoTableModel(new ArrayList<Proceso>()));
         super.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
         super.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
-        this.setProcesos(procesos);
-        this.setSpnView(spnView);
-        this.spnView.getjTableProcesosEspera().setModel(super.getPendiente());
-        this.spnView.getjTableProcesoEnCurso().setModel(super.getEjecutando());
-        this.spnView.getjTableProcesosTerminados().setModel(super.getListo());
+        super.setProcesos(procesos);
+        this.fifoView.getjTableProcesosEspera().setModel(super.getPendiente());
+        this.fifoView.getjTableProcesoEnCurso().setModel(super.getEjecutando());
+        this.fifoView.getjTableProcesosTerminados().setModel(super.getListo());
     }
+    
+    public SPN(String nombre, String caracteristicas, String funcion, String ventaja, Proceso proceso){
+        super(nombre, caracteristicas, ventaja);
+        this.setProcesos(new ArrayList<Proceso>());
+        this.agregarProceso(proceso);
+    }
+    
     public boolean agregarProceso(Proceso proceso){
         return this.getProcesos().add(proceso);
     }
@@ -48,10 +47,9 @@ public class SPN extends Algoritmo implements Runnable{
         return this.getProcesos().remove(proceso);
     }
 
-    
     public void run() {
             Proceso proceso;//creamos un proceso de la clase proceso
-            this.spnView.getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
+            this.fifoView.getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
             
             int timer = 0;//creamos una variable timer con inicializacion cero (0)
             
@@ -74,11 +72,11 @@ public class SPN extends Algoritmo implements Runnable{
                     super.getEjecutando().removeRow(0);
                     super.getEjecutando().addRow(proceso);//se envia el proceso a la tabla de procesos en ejecucion
                     //for (int i = 0; i < proceso.getDuracion(); i++){//para i iniciando en 0 hasta i menor al tiempo de rafaga de cpu, i aumenta en 1
-                        this.spnView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                        this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                         try {
                             Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                         } catch (InterruptedException ex) {
-                            Logger.getLogger(FifoView.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
+                            Logger.getLogger(VentanaSimulacion.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
                         }
                     //}
                     if(proceso.getDuracionRestante()<=0){
@@ -90,11 +88,11 @@ public class SPN extends Algoritmo implements Runnable{
             }
                 else{
                     timer++;
-                    this.spnView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                    this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                     try {
                         Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(FifoView.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
+                        Logger.getLogger(VentanaSimulacion.class.getName()).log(Level.SEVERE, null, ex);//en caso de ocurrir un error en la ejecucion se enviara un mensaje de aviso informando del error
                     }
                 }
         }
