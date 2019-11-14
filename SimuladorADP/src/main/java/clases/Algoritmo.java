@@ -126,7 +126,7 @@ public class Algoritmo extends Thread{
     }
     
     public Proceso getProcesoByID(int ID){
-        Proceso proceso = new Proceso();
+        Proceso proceso = null;
         for (Proceso procesoAux : this.getProcesos()) {
             if(procesoAux.getId()==ID){
                 proceso = procesoAux;

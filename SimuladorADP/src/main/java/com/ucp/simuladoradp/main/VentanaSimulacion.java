@@ -12,7 +12,6 @@ import clases.SPN;
 import clases.SRT;
 import clases.Proceso;
 import clases.ProcesoTableModel;
-import clases.Simulacion;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
@@ -512,17 +511,18 @@ public class VentanaSimulacion extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableProcesosMouseClicked
 
     private void jItemAgregarFilaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jItemAgregarFilaMouseClicked
-        procesosTableModel.addRow(new Proceso());
+        
+        procesosTableModel.addRow(null);
     }//GEN-LAST:event_jItemAgregarFilaMouseClicked
 
     private void jItemAgregarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemAgregarFilaActionPerformed
         // TODO add your handling code here:
-        procesosTableModel.addRow(new Proceso());
+        procesosTableModel.addRow(null);
     }//GEN-LAST:event_jItemAgregarFilaActionPerformed
 
     private void jItemEliminarFilaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jItemEliminarFilaMouseClicked
         // TODO add your handling code here:
-        procesosTableModel.addRow(new Proceso());
+        procesosTableModel.addRow(null);
     }//GEN-LAST:event_jItemEliminarFilaMouseClicked
 
     private void jItemEliminarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jItemEliminarFilaActionPerformed

@@ -120,7 +120,7 @@ public boolean isCellEditable(int rowIndex, int columnIndex)
     }
 
     public boolean esElMasTemprano(Proceso process) {
-        Proceso procesoMinimo = new Proceso();
+        Proceso procesoMinimo = null;
         double min = 1000;
         int indice = 0;
         for (Proceso p : this.getListProcess()) {

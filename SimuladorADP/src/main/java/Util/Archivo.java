@@ -45,7 +45,7 @@ public class Archivo {
                     double instante_entrada = archivoDIS.readDouble();
                     double duracion=  archivoDIS.readDouble();
                     Proceso proceso = new Proceso(id, nombre, instante_entrada, duracion);
-                    proceso.mostrar();
+                    //proceso.mostrar();
                     procesos.add(proceso);
                 }
                 archivoDIS.close();
