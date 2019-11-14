@@ -89,11 +89,11 @@ public class Proceso implements Comparable<Proceso>{
     }
 
     @Override
-    public int compareTo(Proceso o) {
-        if(this.getInstante_entrada()<o.getInstante_entrada()){
+    public int compareTo(Proceso proceso) {
+        if(this.getInstante_entrada()<proceso.getInstante_entrada()){
             return -1;
         }
-        else if(this.getInstante_entrada()>o.getInstante_entrada()){
+        else if(this.getInstante_entrada()>proceso.getInstante_entrada()){
             return 1;
         }
         else{

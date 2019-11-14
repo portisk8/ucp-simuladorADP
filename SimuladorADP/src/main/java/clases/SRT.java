@@ -16,21 +16,8 @@ import java.util.logging.Logger;
  */
 public class SRT extends Algoritmo {
     
-    
-    private VentanaSimulacion fifoView; //Se implementa por variable instancia debido a una necesidad de actualizacion de interfaz para la simulacion.
-    
-    
-    public SRT(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, VentanaSimulacion fifoView){
-        super(nombre, caracteristicas, ventaja);
-        this.fifoView = fifoView;
-        Collections.sort(procesos);
-        super.setPendiente(new ProcesoTableModel(new ArrayList<Proceso>()));
-        super.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
-        super.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
-        super.setProcesos(procesos);
-        this.fifoView.getjTableProcesosEspera().setModel(super.getPendiente());
-        this.fifoView.getjTableProcesoEnCurso().setModel(super.getEjecutando());
-        this.fifoView.getjTableProcesosTerminados().setModel(super.getListo());
+    public SRT(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, VentanaSimulacion view){
+        super(nombre, caracteristicas, ventaja, procesos, view);
     }
     
     public SRT(String nombre, String caracteristicas, String funcion, String ventaja, Proceso proceso){
@@ -52,9 +39,9 @@ public class SRT extends Algoritmo {
         return this.getProcesos().remove(proceso);
     }
 
-    public void run() {
+    public void run(){
             Proceso proceso, proceso2;//creamos un proceso de la clase proceso
-            this.fifoView.getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
+            this.getView().getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
             
             int timer = 0;//creamos una variable timer con inicializacion cero (0)
             
@@ -93,7 +80,7 @@ public class SRT extends Algoritmo {
                     }
                     timer++;//variable timer aumenta en uno
                     super.getEjecutando().getProceso(0).calcularDuracionRestante(1);
-                        this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                        this.getView().getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                         try {
                             Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                         } catch (InterruptedException ex) {
@@ -107,7 +94,7 @@ public class SRT extends Algoritmo {
             }
                 else{
                     timer++;
-                    this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                    this.getView().getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                     try {
                         Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                     } catch (InterruptedException ex) {

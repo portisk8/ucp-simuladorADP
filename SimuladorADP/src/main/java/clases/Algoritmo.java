@@ -1,5 +1,6 @@
 
 package clases;
+import com.ucp.simuladoradp.main.VentanaSimulacion;
 import java.util.*;
 
 
@@ -11,7 +12,8 @@ public class Algoritmo extends Thread{
     private ProcesoTableModel pendiente;
     private ProcesoTableModel ejecutando;
     private ProcesoTableModel listo;
-
+    private VentanaSimulacion view; //Se implementa por variable instancia debido a una necesidad de actualizacion de interfaz para la simulacion.
+    
     public Algoritmo(){
         this.setNombre(null);
         this.setCaracteristicas(null);
@@ -24,6 +26,22 @@ public class Algoritmo extends Thread{
         this.setCaracteristicas(caracteristicas);
         this.setVentaja(ventaja);
         this.setProcesos(new ArrayList<Proceso>());
+    }
+    
+    public Algoritmo(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, VentanaSimulacion fifoView){
+        this.setNombre(nombre);
+        this.setCaracteristicas(caracteristicas);
+        this.setVentaja(ventaja);
+        this.setProcesos(new ArrayList<Proceso>());
+        this.view = fifoView;
+        Collections.sort(procesos);
+        this.setPendiente(new ProcesoTableModel(new ArrayList<Proceso>()));
+        this.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
+        this.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
+        this.setProcesos(procesos);
+        this.view.getjTableProcesosEspera().setModel(this.getPendiente());
+        this.view.getjTableProcesoEnCurso().setModel(this.getEjecutando());
+        this.view.getjTableProcesosTerminados().setModel(this.getListo());
     }
     
     public String getNombre() {
@@ -140,6 +158,14 @@ public class Algoritmo extends Thread{
             proceso.setDuracionRestante(proceso.getDuracion());
             proceso.setFinalizado(false);
         }
+    }
+
+    public VentanaSimulacion getView() {
+        return view;
+    }
+
+    private void setView(VentanaSimulacion view) {
+        this.view = view;
     }
 
     

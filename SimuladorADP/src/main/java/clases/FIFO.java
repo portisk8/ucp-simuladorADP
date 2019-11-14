@@ -16,21 +16,8 @@ import java.util.logging.Logger;
  */
 public class FIFO extends Algoritmo {
     
-    
-    private VentanaSimulacion fifoView; //Se implementa por variable instancia debido a una necesidad de actualizacion de interfaz para la simulacion.
-    
-    
-    public FIFO(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, VentanaSimulacion fifoView){
-        super(nombre, caracteristicas, ventaja);
-        this.fifoView = fifoView;
-        Collections.sort(procesos);
-        super.setPendiente(new ProcesoTableModel(new ArrayList<Proceso>()));
-        super.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
-        super.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
-        super.setProcesos(procesos);
-        this.fifoView.getjTableProcesosEspera().setModel(super.getPendiente());
-        this.fifoView.getjTableProcesoEnCurso().setModel(super.getEjecutando());
-        this.fifoView.getjTableProcesosTerminados().setModel(super.getListo());
+    public FIFO(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, VentanaSimulacion view){
+        super(nombre, caracteristicas, ventaja, procesos, view);
     }
     
     public FIFO(String nombre, String caracteristicas, String funcion, String ventaja, Proceso proceso){
@@ -54,7 +41,7 @@ public class FIFO extends Algoritmo {
 
     public void run() {
             Proceso proceso;//creamos un proceso de la clase proceso
-            this.fifoView.getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
+            this.getView().getTimerCpu().setText("0");//seteamos el valor de la vista fifo con valor cero (0)
             
             int timer = 0;//creamos una variable timer con inicializacion cero (0)
             
@@ -77,7 +64,7 @@ public class FIFO extends Algoritmo {
                     super.getEjecutando().removeRow(0);
                     super.getEjecutando().addRow(proceso);//se envia el proceso a la tabla de procesos en ejecucion
                     //for (int i = 0; i < proceso.getDuracion(); i++){//para i iniciando en 0 hasta i menor al tiempo de rafaga de cpu, i aumenta en 1
-                        this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                        this.getView().getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                         try {
                             Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                         } catch (InterruptedException ex) {
@@ -93,7 +80,7 @@ public class FIFO extends Algoritmo {
             }
                 else{
                     timer++;
-                    this.fifoView.getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
+                    this.getView().getTimerCpu().setText(Integer.toString(timer));//setea el valor del componente de la vist fifo para mostrar en la rafaga de cpu el valor del tiempo
                     try {
                         Thread.sleep(1000);//el hilo queda en modo espera por 1 segundo
                     } catch (InterruptedException ex) {
