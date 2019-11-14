@@ -53,7 +53,7 @@ public class Proceso implements Comparable<Proceso>{
         return id;
     }
 
-    public void setId(int id) {
+    protected void setId(int id) {
         this.id = id;
     }
 
@@ -61,7 +61,7 @@ public class Proceso implements Comparable<Proceso>{
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    protected void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -69,7 +69,7 @@ public class Proceso implements Comparable<Proceso>{
         return instante_entrada;
     }
 
-    public void setInstante_entrada(double instante_entrada) {
+    protected void setInstante_entrada(double instante_entrada) {
         this.instante_entrada = instante_entrada;
     }
 
@@ -77,7 +77,7 @@ public class Proceso implements Comparable<Proceso>{
         return duracion;
     }
 
-    public void setDuracion(double duracion) {
+    protected void setDuracion(double duracion) {
         this.duracion = duracion;
         this.setDuracionRestante(duracion);
     }
@@ -99,7 +99,7 @@ public class Proceso implements Comparable<Proceso>{
     /**
      * @param seleccionado the seleccionado to set
      */
-    public void setSeleccionado(boolean seleccionado) {
+    protected void setSeleccionado(boolean seleccionado) {
         this.seleccionado = seleccionado;
     }
 
@@ -116,7 +116,7 @@ public class Proceso implements Comparable<Proceso>{
         }
     }
     
-    public void finalizar(){
+    protected void finalizar(){
         this.setFinalizado(true);
     }
     /**
@@ -129,7 +129,7 @@ public class Proceso implements Comparable<Proceso>{
     /**
      * @param finalizado the finalizado to set
      */
-    public void setFinalizado(boolean finalizado) {
+    protected void setFinalizado(boolean finalizado) {
         this.finalizado = finalizado;
     }
 
@@ -143,7 +143,7 @@ public class Proceso implements Comparable<Proceso>{
     /**
      * @param duracionRestante the duracionRestante to set
      */
-    public void setDuracionRestante(double duracionRestante) {
+    protected void setDuracionRestante(double duracionRestante) {
         this.duracionRestante = duracionRestante;
     }
     
