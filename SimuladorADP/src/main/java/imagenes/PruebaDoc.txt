@@ -1,0 +1,6 @@
+Algoritmo de planificacion FIFO (first in, first out)
+En el algoritmo FIFO los procesos se despachan de acuerdo con su tiempo de llegada a la cola de procesos listos.
+
+Cuando un proceso tiene la CPU se ejecuta hasta terminar.
+Características: Algunas de las características de este algoritmo es que es no apropiativo y justo en el sentido formal, aunque injusto en el sentido de que: los trabajos largos hacen esperar a los cortos y los trabajos sin importancia hacen esperar a los importantes. Por otro lado es predecible pero no garantiza buenos tiempos de respuesta y por ello se emplea como esquema secundario.
+Ventajas: La ventaja de este algoritmo es su fácil implementación, sin embargo, no es válido para entornos interactivos ya que un proceso de mucho cálculo de CPU hace aumentar el tiempo de espera de los demás procesos
