@@ -92,21 +92,22 @@ public class VentanaSimulacion extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabelInformacion = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        btnComparar = new javax.swing.JButton();
+        panelEspera = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProcesosEspera = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
+        panelEjec = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableProcesoEnCurso = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
+        panelTermin = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableProcesosTerminados = new javax.swing.JTable();
         jBtnIniciar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        rafagaCPULabel = new javax.swing.JLabel();
         timerCpu = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        labelEspera = new javax.swing.JLabel();
+        labelTermin = new javax.swing.JLabel();
+        labelEjec = new javax.swing.JLabel();
 
         jItemAgregarFila.setText("Agregar Fila");
         jItemAgregarFila.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -229,6 +230,13 @@ public class VentanaSimulacion extends javax.swing.JFrame {
             }
         });
 
+        btnComparar.setText("Comparar");
+        btnComparar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompararActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -242,21 +250,23 @@ public class VentanaSimulacion extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addGap(144, 144, 144)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 442, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnComparar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(170, 170, 170))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,18 +282,20 @@ public class VentanaSimulacion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(89, 89, 89)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(btnComparar)))
         );
 
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
+        panelEspera.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
 
         jTableProcesosEspera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -298,24 +310,24 @@ public class VentanaSimulacion extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableProcesosEspera);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelEsperaLayout = new javax.swing.GroupLayout(panelEspera);
+        panelEspera.setLayout(panelEsperaLayout);
+        panelEsperaLayout.setHorizontalGroup(
+            panelEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEsperaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panelEsperaLayout.setVerticalGroup(
+            panelEsperaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEsperaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
+        panelEjec.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
 
         jTableProcesoEnCurso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -330,24 +342,24 @@ public class VentanaSimulacion extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableProcesoEnCurso);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelEjecLayout = new javax.swing.GroupLayout(panelEjec);
+        panelEjec.setLayout(panelEjecLayout);
+        panelEjecLayout.setHorizontalGroup(
+            panelEjecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEjecLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        panelEjecLayout.setVerticalGroup(
+            panelEjecLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEjecLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
+        panelTermin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
 
         jTableProcesosTerminados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -362,18 +374,18 @@ public class VentanaSimulacion extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTableProcesosTerminados);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelTerminLayout = new javax.swing.GroupLayout(panelTermin);
+        panelTermin.setLayout(panelTerminLayout);
+        panelTerminLayout.setHorizontalGroup(
+            panelTerminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTerminLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        panelTerminLayout.setVerticalGroup(
+            panelTerminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTerminLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                 .addContainerGap())
@@ -386,28 +398,28 @@ public class VentanaSimulacion extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel4.setText("Rafaga CPU (seg)");
+        rafagaCPULabel.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        rafagaCPULabel.setText("Rafaga CPU (seg)");
 
         timerCpu.setFont(new java.awt.Font("Verdana", 0, 48)); // NOI18N
         timerCpu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timerCpu.setText("0");
         timerCpu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 179, 20));
-        jLabel2.setText("Procesos en Espera");
-        jLabel2.setToolTipText("");
+        labelEspera.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        labelEspera.setForeground(new java.awt.Color(51, 179, 20));
+        labelEspera.setText("Procesos en Espera");
+        labelEspera.setToolTipText("");
 
-        jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 179, 20));
-        jLabel3.setText("Procesos Terminados");
-        jLabel3.setToolTipText("");
+        labelTermin.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        labelTermin.setForeground(new java.awt.Color(51, 179, 20));
+        labelTermin.setText("Procesos Terminados");
+        labelTermin.setToolTipText("");
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 179, 20));
-        jLabel1.setText("Proceso en Ejecucion");
-        jLabel1.setToolTipText("");
+        labelEjec.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        labelEjec.setForeground(new java.awt.Color(51, 179, 20));
+        labelEjec.setText("Proceso en Ejecucion");
+        labelEjec.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -420,29 +432,28 @@ public class VentanaSimulacion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(labelEspera)
                                 .addGap(400, 400, 400)
-                                .addComponent(jLabel1)
+                                .addComponent(labelEjec)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3))
+                                .addComponent(labelTermin))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(panelEspera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(panelEjec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(rafagaCPULabel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(timerCpu, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(31, 31, 31)
-                                                .addComponent(jBtnIniciar)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(jBtnIniciar)))
                                         .addGap(121, 121, 121)))
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(panelTermin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 95, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -452,21 +463,21 @@ public class VentanaSimulacion extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1))
+                    .addComponent(labelEspera)
+                    .addComponent(labelTermin)
+                    .addComponent(labelEjec))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelEjec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
+                        .addComponent(rafagaCPULabel)
                         .addGap(1, 1, 1)
                         .addComponent(timerCpu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelEspera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelTermin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -501,15 +512,6 @@ public class VentanaSimulacion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jBtnIniciarActionPerformed
 
-    private void jTableProcesosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProcesosMouseClicked
-        // TODO add your handling code here:
-        if(evt.getButton() == 3){
-            jPopUpMenuTable.setLocation(evt.getLocationOnScreen());
-            jPopUpMenuTable.show(evt.getComponent(), evt.getX(), evt.getY());
-            jPopUpMenuTable.setVisible(true);            
-        }else{jPopUpMenuTable.setVisible(false);}
-    }//GEN-LAST:event_jTableProcesosMouseClicked
-
     private void jItemAgregarFilaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jItemAgregarFilaMouseClicked
         
         procesosTableModel.addRow(null);
@@ -529,11 +531,43 @@ public class VentanaSimulacion extends javax.swing.JFrame {
         procesosTableModel.removeRow(jTableProcesos.getSelectedRow());
     }//GEN-LAST:event_jItemEliminarFilaActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < this.procesosTableModel.getRowCount(); i++) {
+            jTableProcesos.getModel().setValueAt(false, i, 0);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < this.procesosTableModel.getRowCount(); i++) {
+            jTableProcesos.getModel().setValueAt(true, i, 0);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTableProcesosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProcesosMouseClicked
+        // TODO add your handling code here:
+        if(evt.getButton() == 3){
+            jPopUpMenuTable.setLocation(evt.getLocationOnScreen());
+            jPopUpMenuTable.show(evt.getComponent(), evt.getX(), evt.getY());
+            jPopUpMenuTable.setVisible(true);
+        }else{jPopUpMenuTable.setVisible(false);}
+    }//GEN-LAST:event_jTableProcesosMouseClicked
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-            this.listProcess = Archivo.getProcesos();
-            procesosTableModel = new ProcesoTableModel(this.listProcess);
-            jTableProcesos.setModel(procesosTableModel);
+        this.listProcess = Archivo.getProcesos();
+        procesosTableModel = new ProcesoTableModel(this.listProcess);
+        jTableProcesos.setModel(procesosTableModel);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -543,28 +577,12 @@ public class VentanaSimulacion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCompararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompararActionPerformed
         // TODO add your handling code here:
-        for (int i = 0; i < this.procesosTableModel.getRowCount(); i++) {
-            jTableProcesos.getModel().setValueAt(true, i, 0);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        for (int i = 0; i < this.procesosTableModel.getRowCount(); i++) {
-            jTableProcesos.getModel().setValueAt(false, i, 0);
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
+        CuadroComparacion cuadro = new CuadroComparacion();
+        cuadro.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCompararActionPerformed
 
     /**
      * @param args the command line arguments
@@ -629,6 +647,7 @@ public class VentanaSimulacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnComparar;
     private javax.swing.JButton jBtnIniciar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -639,16 +658,9 @@ public class VentanaSimulacion extends javax.swing.JFrame {
     private javax.swing.JFileChooser jFileChooser;
     private javax.swing.JMenuItem jItemAgregarFila;
     private javax.swing.JMenuItem jItemEliminarFila;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelInformacion;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPopupMenu jPopUpMenuTable;
     private javax.swing.JScrollPane jScrollPane1;
@@ -660,6 +672,13 @@ public class VentanaSimulacion extends javax.swing.JFrame {
     private javax.swing.JTable jTableProcesosEspera;
     private javax.swing.JTable jTableProcesosTerminados;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel labelEjec;
+    private javax.swing.JLabel labelEspera;
+    private javax.swing.JLabel labelTermin;
+    private javax.swing.JPanel panelEjec;
+    private javax.swing.JPanel panelEspera;
+    private javax.swing.JPanel panelTermin;
+    private javax.swing.JLabel rafagaCPULabel;
     private javax.swing.JLabel timerCpu;
     // End of variables declaration//GEN-END:variables
 
@@ -677,5 +696,81 @@ public class VentanaSimulacion extends javax.swing.JFrame {
 
     public void setNuevoQanto(int nuevoQanto) {
         this.nuevoQanto = nuevoQanto;
+    }
+
+    public javax.swing.JPanel getPanelEjec() {
+        return panelEjec;
+    }
+
+    public void setPanelEjec(javax.swing.JPanel panelEjec) {
+        this.panelEjec = panelEjec;
+    }
+
+    public javax.swing.JPanel getPanelEspera() {
+        return panelEspera;
+    }
+
+    public void setPanelEspera(javax.swing.JPanel panelEspera) {
+        this.panelEspera = panelEspera;
+    }
+
+    public javax.swing.JPanel getPanelTermin() {
+        return panelTermin;
+    }
+
+    public void setPanelTermin(javax.swing.JPanel panelTermin) {
+        this.panelTermin = panelTermin;
+    }
+
+    public javax.swing.JLabel getRafagaCPULabel() {
+        return rafagaCPULabel;
+    }
+
+    public void setRafagaCPULabel(javax.swing.JLabel rafagaCPULabel) {
+        this.rafagaCPULabel = rafagaCPULabel;
+    }
+
+    public void setTimerCpu(javax.swing.JLabel timerCpu) {
+        this.timerCpu = timerCpu;
+    }
+
+    public javax.swing.JButton getjBtnIniciar() {
+        return jBtnIniciar;
+    }
+
+    public void setjBtnIniciar(javax.swing.JButton jBtnIniciar) {
+        this.jBtnIniciar = jBtnIniciar;
+    }
+
+    public javax.swing.JLabel getLabelEjec() {
+        return labelEjec;
+    }
+
+    public void setLabelEjec(javax.swing.JLabel labelEjec) {
+        this.labelEjec = labelEjec;
+    }
+
+    public javax.swing.JLabel getLabelEspera() {
+        return labelEspera;
+    }
+
+    public void setLabelEspera(javax.swing.JLabel labelEspera) {
+        this.labelEspera = labelEspera;
+    }
+
+    public javax.swing.JLabel getLabelTermin() {
+        return labelTermin;
+    }
+
+    public void setLabelTermin(javax.swing.JLabel labelTermin) {
+        this.labelTermin = labelTermin;
+    }
+
+    public javax.swing.JButton getBtnComparar() {
+        return btnComparar;
+    }
+
+    public void setBtnComparar(javax.swing.JButton btnComparar) {
+        this.btnComparar = btnComparar;
     }
 }
