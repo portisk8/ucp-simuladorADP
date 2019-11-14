@@ -565,7 +565,7 @@ public class VentanaSimulacion extends javax.swing.JFrame {
         // TODO add your handling code here:
         Main volverAtras = new Main ();
         volverAtras.setVisible (true);
-        dispose ();
+        dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
