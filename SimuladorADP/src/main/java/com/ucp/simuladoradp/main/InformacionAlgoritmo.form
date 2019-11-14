@@ -24,31 +24,28 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="43" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="1" min="-2" pref="412" max="-2" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabel1" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="90" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Component id="jButtonAtras" min="-2" pref="87" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" min="-2" pref="407" max="-2" attributes="0"/>
+                  <Component id="jButtonAtras" min="-2" pref="87" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="273" max="-2" attributes="0"/>
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="301" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButtonAtras" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
           </Group>
@@ -58,8 +55,16 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="SSTF"/>
+        <Property name="text" type="java.lang.String" value="Dekker"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonAtras">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Atras"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAtrasActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -71,18 +76,9 @@
         <Component class="javax.swing.JTextPane" name="jTextPane1">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="Algoritmo SSTF (Shortest Service Time First)&#xa;La pol&#xed;tica SSTF consiste en seleccionar la petici&#xf3;n de E/S del disco que requiera un menor movimiento del brazo desde su posici&#xf3;n actual. De este modo, siempre se realiza una selecci&#xf3;n de manera que se produzca un tiempo de b&#xfa;squeda m&#xed;nimo.&#xa;&#xa;Caracter&#xed;sticas: &#xa;La ejecuci&#xf3;n de este algoritmo busca mejorar la problem&#xe1;tica del algoritmo FCFS, es decir, mediante esta planificaci&#xf3;n, el sistema operativo dar&#xe1; la orden para que el cabezal del disco se mueva hacia la solicitud m&#xe1;s cercana, satisfaciendo un mayor n&#xfa;mero de solicitudes pendientes en un menor tiempo. &#xa;&#xa;&#xa;Ventaja: &#xa;SSTF tiene la ventaja de ser un algoritmo muy simple y que mejora claramente el m&#xe9;todo FIFO, en el sentido de que reduce dr&#xe1;sticamente el n&#xfa;mero de saltos que tiene que realizar el cabezal haciendo que el tiempo medio de respuesta se reduzca.&#xa;"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButtonAtras">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Atras"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAtrasActionPerformed"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>

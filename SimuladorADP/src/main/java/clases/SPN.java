@@ -39,6 +39,11 @@ public class SPN extends Algoritmo {
         this.agregarProceso(proceso);
     }
     
+    public SPN(String nombre, String caracteristicas, String ventaja){
+        super(nombre, caracteristicas, ventaja);
+        this.setProcesos(new ArrayList<Proceso>());
+    }
+    
     public boolean agregarProceso(Proceso proceso){
         return this.getProcesos().add(proceso);
     }

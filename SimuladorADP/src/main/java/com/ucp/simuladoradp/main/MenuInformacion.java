@@ -5,16 +5,23 @@
  */
 package com.ucp.simuladoradp.main;
 
+import clases.Algoritmo;
+import clases.FIFO;
+import clases.RR;
+import clases.SPN;
+import clases.SRT;
+import clases.SRT;
+
 /**
  *
  * @author Facun
  */
-public class Informacion extends javax.swing.JFrame {
+public class MenuInformacion extends javax.swing.JFrame {
 
     /**
      * Creates new form Informacion
      */
-    public Informacion() {
+    public MenuInformacion() {
         
          initComponents();
         this.setLocationRelativeTo(null);
@@ -152,17 +159,14 @@ public class Informacion extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonRR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonSPN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonSW, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonFIFO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonSTR, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButtonRR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSPN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSW, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonFIFO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonSTR, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonScan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -190,7 +194,7 @@ public class Informacion extends javax.swing.JFrame {
                     .addComponent(jButton7)
                     .addComponent(jButtonSPN))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonSTR)
                     .addComponent(jButton9))
                 .addGap(18, 18, 18)
@@ -215,7 +219,8 @@ public class Informacion extends javax.swing.JFrame {
 
     private void jButtonFIFOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFIFOActionPerformed
         // TODO add your handling code here:
-         InformacionFIFO verInformacionFIFO = new InformacionFIFO ();
+         FIFO fifo = new FIFO("FIFO", "\n  Algunas de las características de este algoritmo es que es no apropiativo y justo en el sentido formal, aunque injusto en el sentido de que: los trabajos largos hacen esperar a los cortos y los trabajos sin importancia hacen esperar a los importantes. Por otro lado es predecible pero no garantiza buenos tiempos de respuesta y por ello se emplea como esquema secundario.", "\n La ventaja de este algoritmo es su fácil implementación, sin embargo, no es válido para entornos interactivos ya que un proceso de mucho cálculo de CPU hace aumentar el tiempo de espera de los demás procesos.");
+         InformacionAlgoritmo verInformacionFIFO = new InformacionAlgoritmo (fifo);
          verInformacionFIFO.setVisible (true);
          dispose();
     }//GEN-LAST:event_jButtonFIFOActionPerformed
@@ -227,63 +232,76 @@ public class Informacion extends javax.swing.JFrame {
 
     private void jButtonRRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRRActionPerformed
         // TODO add your handling code here:
-         InformacionRR verInformacionRR = new InformacionRR ();
+         RR rr = new RR("RR", "\n  La determinación del tamaño del quantum es vital para la operación efectiva de un sistema de cómputo.\n" +
+"Si el quantum de tiempo es muy grande, cada proceso tendrá el tiempo necesario para terminar, de manera que el esquema de planificación por turno rotatorio degenera en uno de FIFO.\n" +
+"Si el quantum es muy pequeño, el gasto extra por cambio de proceso se convierte en el factor dominante y el rendimiento del sistema se degradará hasta el punto en que la mayor parte del tiempo se invierte en la conmutación del procesador, con muy poco o ningún tiempo para ejecutar los programas de los usuarios.", "\n  El round robin es muy fácil de implementar. Todo lo que necesita el planificador es mantener una lista de los procesos listos.");
+         InformacionAlgoritmo verInformacionRR = new InformacionAlgoritmo(rr);
          verInformacionRR.setVisible (true);
          dispose();
     }//GEN-LAST:event_jButtonRRActionPerformed
 
     private void jButtonSPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSPNActionPerformed
         // TODO add your handling code here:
-         InformacionSPN verInformacionSPN = new InformacionSPN ();
+         SPN spn = new SPN("SPN", "\n Este algoritmo no expropiativo favorece a los procesos más cortos. De esta forma se consigue que los procesos más cortos se sitúen por delante de los largos. Esto ofrece un beneficio frente al algoritmo FIFO puesto que da un tiempo de procesamiento más óptimo.", "\n  Tiene el mínimo tiempo de espera promedio para el conjunto de procesos.\n" +
+"Ayuda a los procesos más cortos. \n" +
+"Minimiza el tiempo de espera medio.");
+         InformacionAlgoritmo verInformacionSPN = new InformacionAlgoritmo (spn);
          verInformacionSPN.setVisible (true);
          dispose();
     }//GEN-LAST:event_jButtonSPNActionPerformed
 
     private void jButtonSTRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSTRActionPerformed
         // TODO add your handling code here:
-         InformacionSRT verInformacionSRT = new InformacionSRT ();
+         SRT str = new SRT("SRT", "\n El algoritmo de SRT (Tiempo restante más corto) viene de una versión con adquisición de prioridad (SPN) en la que el objetivo siempre es elegir el proceso que tiene el tiempo restante de procesamiento esperado más corto.", "\n Ofrece un buen tiempo de respuesta. La productividad es alta a cambio de la sobrecarga del sistema es decir que a cada paso debe decidir a qué proceso asignar la CPU.");
+         InformacionAlgoritmo verInformacionSRT = new InformacionAlgoritmo (str);
          verInformacionSRT.setVisible (true);
          dispose();
     }//GEN-LAST:event_jButtonSTRActionPerformed
 
     private void jButtonSWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSWActionPerformed
         // TODO add your handling code here:
-         InformacionSwapping verInformacionSWP = new InformacionSwapping ();
+         Algoritmo swapping = new Algoritmo("swapping", "\n En lugar de utilizar espacio en memoria RAM, el swapping utiliza espacio en disco duro para almacenar datos temporales, reduciendo así el uso de la RAM.", "\n Las ventajas en tener el disco particionado es que si tenemos un error o problema en una de las particiones, las demás no se verán afectadas. Podemos tener nuestros archivos de datos en particionales totalmente independientes y borrar/cambiar el contenido de una partición sin que esto afecte a los demás.");
+         InformacionAlgoritmo verInformacionSWP = new InformacionAlgoritmo (swapping);
          verInformacionSWP.setVisible (true);
          dispose();
     }//GEN-LAST:event_jButtonSWActionPerformed
 
     private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
         // TODO add your handling code here:
-         InformacionScan verInformacionScan = new InformacionScan ();
+         Algoritmo scan = new Algoritmo("scan", "\n Las cabezas se mueven de un extremo a otro del disco, atendiendo las solicitudes que se van encontrando.Con SCAN, al llegar a un extremo y cambiar de sentido, se encuentran por lo general pocas solicitudes. La mayor densidad estará en el extremo opuesto, con las solicitudes que llevan más tiempo esperando.", "\n  La ventaja que nos da el algoritmo de SCAN son que los Tiempos de servicio son más acotados, y más variables en los extremos que en el centro.");
+         InformacionAlgoritmo verInformacionScan = new InformacionAlgoritmo (scan);
          verInformacionScan.setVisible (true);
          dispose();
     }//GEN-LAST:event_jButtonScanActionPerformed
 
     private void jButtonSSTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSSTFActionPerformed
         // TODO add your handling code here:
-          InformacionSSTF verInformacionSSTF = new InformacionSSTF ();
+         Algoritmo sstf = new Algoritmo("sstf", "\n La ejecución de este algoritmo busca mejorar la problemática del algoritmo FCFS, es decir, mediante esta planificación, el sistema operativo dará la orden para que el cabezal del disco se mueva hacia la solicitud más cercana, satisfaciendo un mayor número de solicitudes pendientes en un menor tiempo.", "\n SSTF tiene la ventaja de ser un algoritmo muy simple y que mejora claramente el método FIFO, en el sentido de que reduce drásticamente el número de saltos que tiene que realizar el cabezal haciendo que el tiempo medio de respuesta se reduzca.");
+         InformacionAlgoritmo verInformacionSSTF = new InformacionAlgoritmo (sstf);
          verInformacionSSTF.setVisible (true);
          dispose();
     }//GEN-LAST:event_jButtonSSTFActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-          InformacionDekker verInformacionDekker = new InformacionDekker ();
+          Algoritmo dekker = new Algoritmo("dekker", "\n Fue uno de los primeros algoritmos de exclusión mutua inventados, implementado por Edsger Dijkstra. Si ambos procesos intentan acceder a la sección crítica simultáneamente, el algoritmo elige un proceso según una variable turno. Si el otro proceso está ejecutando en su sección crítica, deberá esperar su finalización.", "\n Esta técnica tiene la ventaja de mostrar muchos de los errores típicos del desarrollo de programas concurrentes.");
+         InformacionAlgoritmo verInformacionDekker = new InformacionAlgoritmo (dekker);
          verInformacionDekker.setVisible (true);
          dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-          InformacionPeterson verInformacionPeter = new InformacionPeterson ();
+          Algoritmo peter = new Algoritmo("peter", "\n El algoritmo fue desarrollado en 1981, para dos procesos que fue una simplificación del algoritmo desarrollado por Dekker. Más tarde este algoritmo fue generalizado para N procesos.", "\n Es aplicable a cualquier número de procesos con memoria compartida tanto del monoprocesador como de multiprocesador, es simple, fácil de verificar y puede usarse para varias secciones críticas");
+         InformacionAlgoritmo verInformacionPeter = new InformacionAlgoritmo (peter);
          verInformacionPeter.setVisible (true);
          dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-          InformacionLamport verInformacionLam = new InformacionLamport ();
+          Algoritmo lamport = new Algoritmo("lamport", "\n El algoritmo de la panadería de Lamport es un algoritmo de computación creado por el científico en computación Lord Leslie Lamport, para implementar la exclusión mutua de N procesos o hilos de ejecución. Este toma el nombre de algoritmo de panadería porque simula la costumbre de atender mediante un número de turno, el cliente entra al local y retira un número(turno) y lo utilizan para ir atendiendolos en orden de llegada.", "\n No hay inanición, no hay bloqueo y es fácil de implementar.");
+         InformacionAlgoritmo verInformacionLam = new InformacionAlgoritmo (lamport);
          verInformacionLam.setVisible (true);
          dispose();
     }//GEN-LAST:event_jButton11ActionPerformed
@@ -311,13 +329,13 @@ public class Informacion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Informacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionAlgoritmo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Informacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionAlgoritmo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Informacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionAlgoritmo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Informacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InformacionAlgoritmo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -327,7 +345,7 @@ public class Informacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Informacion().setVisible(true);
+                new InformacionAlgoritmo().setVisible(true);
             }
         });
     }

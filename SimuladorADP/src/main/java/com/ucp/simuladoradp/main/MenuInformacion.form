@@ -36,20 +36,15 @@
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="41" pref="41" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButtonRR" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButtonSPN" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButtonSW" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButtonFIFO" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jButtonRR" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jButtonSPN" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jButtonSW" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jButtonFIFO" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButtonSTR" min="-2" pref="99" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jButtonSTR" min="-2" pref="109" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="96" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -84,9 +79,9 @@
                   <Component id="jButtonSPN" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButtonSTR" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton9" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
