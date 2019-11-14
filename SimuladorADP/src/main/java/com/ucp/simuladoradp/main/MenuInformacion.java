@@ -260,7 +260,7 @@ public class MenuInformacion extends javax.swing.JFrame {
 
     private void jButtonSWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSWActionPerformed
         // TODO add your handling code here:
-         Algoritmo swapping = new Algoritmo("swapping", "\n En lugar de utilizar espacio en memoria RAM, el swapping utiliza espacio en disco duro para almacenar datos temporales, reduciendo así el uso de la RAM.", "\n Las ventajas en tener el disco particionado es que si tenemos un error o problema en una de las particiones, las demás no se verán afectadas. Podemos tener nuestros archivos de datos en particionales totalmente independientes y borrar/cambiar el contenido de una partición sin que esto afecte a los demás.");
+         Algoritmo swapping = new Algoritmo("Swapping", "\n En lugar de utilizar espacio en memoria RAM, el swapping utiliza espacio en disco duro para almacenar datos temporales, reduciendo así el uso de la RAM.", "\n Las ventajas en tener el disco particionado es que si tenemos un error o problema en una de las particiones, las demás no se verán afectadas. Podemos tener nuestros archivos de datos en particionales totalmente independientes y borrar/cambiar el contenido de una partición sin que esto afecte a los demás.");
          InformacionAlgoritmo verInformacionSWP = new InformacionAlgoritmo (swapping);
          verInformacionSWP.setVisible (true);
          dispose();
@@ -268,7 +268,7 @@ public class MenuInformacion extends javax.swing.JFrame {
 
     private void jButtonScanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonScanActionPerformed
         // TODO add your handling code here:
-         Algoritmo scan = new Algoritmo("scan", "\n Las cabezas se mueven de un extremo a otro del disco, atendiendo las solicitudes que se van encontrando.Con SCAN, al llegar a un extremo y cambiar de sentido, se encuentran por lo general pocas solicitudes. La mayor densidad estará en el extremo opuesto, con las solicitudes que llevan más tiempo esperando.", "\n  La ventaja que nos da el algoritmo de SCAN son que los Tiempos de servicio son más acotados, y más variables en los extremos que en el centro.");
+         Algoritmo scan = new Algoritmo("Scan", "\n Las cabezas se mueven de un extremo a otro del disco, atendiendo las solicitudes que se van encontrando.Con SCAN, al llegar a un extremo y cambiar de sentido, se encuentran por lo general pocas solicitudes. La mayor densidad estará en el extremo opuesto, con las solicitudes que llevan más tiempo esperando.", "\n  La ventaja que nos da el algoritmo de SCAN son que los Tiempos de servicio son más acotados, y más variables en los extremos que en el centro.");
          InformacionAlgoritmo verInformacionScan = new InformacionAlgoritmo (scan);
          verInformacionScan.setVisible (true);
          dispose();
@@ -276,7 +276,7 @@ public class MenuInformacion extends javax.swing.JFrame {
 
     private void jButtonSSTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSSTFActionPerformed
         // TODO add your handling code here:
-         Algoritmo sstf = new Algoritmo("sstf", "\n La ejecución de este algoritmo busca mejorar la problemática del algoritmo FCFS, es decir, mediante esta planificación, el sistema operativo dará la orden para que el cabezal del disco se mueva hacia la solicitud más cercana, satisfaciendo un mayor número de solicitudes pendientes en un menor tiempo.", "\n SSTF tiene la ventaja de ser un algoritmo muy simple y que mejora claramente el método FIFO, en el sentido de que reduce drásticamente el número de saltos que tiene que realizar el cabezal haciendo que el tiempo medio de respuesta se reduzca.");
+         Algoritmo sstf = new Algoritmo("SSTF", "\n La ejecución de este algoritmo busca mejorar la problemática del algoritmo FCFS, es decir, mediante esta planificación, el sistema operativo dará la orden para que el cabezal del disco se mueva hacia la solicitud más cercana, satisfaciendo un mayor número de solicitudes pendientes en un menor tiempo.", "\n SSTF tiene la ventaja de ser un algoritmo muy simple y que mejora claramente el método FIFO, en el sentido de que reduce drásticamente el número de saltos que tiene que realizar el cabezal haciendo que el tiempo medio de respuesta se reduzca.");
          InformacionAlgoritmo verInformacionSSTF = new InformacionAlgoritmo (sstf);
          verInformacionSSTF.setVisible (true);
          dispose();
@@ -284,7 +284,7 @@ public class MenuInformacion extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-          Algoritmo dekker = new Algoritmo("dekker", "\n Fue uno de los primeros algoritmos de exclusión mutua inventados, implementado por Edsger Dijkstra. Si ambos procesos intentan acceder a la sección crítica simultáneamente, el algoritmo elige un proceso según una variable turno. Si el otro proceso está ejecutando en su sección crítica, deberá esperar su finalización.", "\n Esta técnica tiene la ventaja de mostrar muchos de los errores típicos del desarrollo de programas concurrentes.");
+          Algoritmo dekker = new Algoritmo("Dekker", "\n Fue uno de los primeros algoritmos de exclusión mutua inventados, implementado por Edsger Dijkstra. Si ambos procesos intentan acceder a la sección crítica simultáneamente, el algoritmo elige un proceso según una variable turno. Si el otro proceso está ejecutando en su sección crítica, deberá esperar su finalización.", "\n Esta técnica tiene la ventaja de mostrar muchos de los errores típicos del desarrollo de programas concurrentes.");
          InformacionAlgoritmo verInformacionDekker = new InformacionAlgoritmo (dekker);
          verInformacionDekker.setVisible (true);
          dispose();
@@ -292,7 +292,7 @@ public class MenuInformacion extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-          Algoritmo peter = new Algoritmo("peter", "\n El algoritmo fue desarrollado en 1981, para dos procesos que fue una simplificación del algoritmo desarrollado por Dekker. Más tarde este algoritmo fue generalizado para N procesos.", "\n Es aplicable a cualquier número de procesos con memoria compartida tanto del monoprocesador como de multiprocesador, es simple, fácil de verificar y puede usarse para varias secciones críticas");
+          Algoritmo peter = new Algoritmo("Peterson", "\n El algoritmo fue desarrollado en 1981, para dos procesos que fue una simplificación del algoritmo desarrollado por Dekker. Más tarde este algoritmo fue generalizado para N procesos.", "\n Es aplicable a cualquier número de procesos con memoria compartida tanto del monoprocesador como de multiprocesador, es simple, fácil de verificar y puede usarse para varias secciones críticas");
          InformacionAlgoritmo verInformacionPeter = new InformacionAlgoritmo (peter);
          verInformacionPeter.setVisible (true);
          dispose();
@@ -300,7 +300,7 @@ public class MenuInformacion extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-          Algoritmo lamport = new Algoritmo("lamport", "\n El algoritmo de la panadería de Lamport es un algoritmo de computación creado por el científico en computación Lord Leslie Lamport, para implementar la exclusión mutua de N procesos o hilos de ejecución. Este toma el nombre de algoritmo de panadería porque simula la costumbre de atender mediante un número de turno, el cliente entra al local y retira un número(turno) y lo utilizan para ir atendiendolos en orden de llegada.", "\n No hay inanición, no hay bloqueo y es fácil de implementar.");
+          Algoritmo lamport = new Algoritmo("Lamport", "\n El algoritmo de la panadería de Lamport es un algoritmo de computación creado por el científico en computación Lord Leslie Lamport, para implementar la exclusión mutua de N procesos o hilos de ejecución. Este toma el nombre de algoritmo de panadería porque simula la costumbre de atender mediante un número de turno, el cliente entra al local y retira un número(turno) y lo utilizan para ir atendiendolos en orden de llegada.", "\n No hay inanición, no hay bloqueo y es fácil de implementar.");
          InformacionAlgoritmo verInformacionLam = new InformacionAlgoritmo (lamport);
          verInformacionLam.setVisible (true);
          dispose();
