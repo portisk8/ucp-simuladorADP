@@ -221,6 +221,7 @@ public class VentanaSimulacion extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Ingrese un quanto deseado:");
 
         jButton5.setText("Atras");
@@ -266,7 +267,7 @@ public class VentanaSimulacion extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(582, Short.MAX_VALUE))))
+                        .addContainerGap(563, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,7 +296,7 @@ public class VentanaSimulacion extends javax.swing.JFrame {
                     .addComponent(btnComparar)))
         );
 
-        panelEspera.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
+        panelEspera.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 0, 0), 3, true));
 
         jTableProcesosEspera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -327,7 +328,7 @@ public class VentanaSimulacion extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        panelEjec.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 179, 20), 3, true));
+        panelEjec.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 0), 3, true));
 
         jTableProcesoEnCurso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -407,7 +408,7 @@ public class VentanaSimulacion extends javax.swing.JFrame {
         timerCpu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         labelEspera.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        labelEspera.setForeground(new java.awt.Color(51, 179, 20));
+        labelEspera.setForeground(new java.awt.Color(204, 0, 0));
         labelEspera.setText("Procesos en Espera");
         labelEspera.setToolTipText("");
 
@@ -417,7 +418,7 @@ public class VentanaSimulacion extends javax.swing.JFrame {
         labelTermin.setToolTipText("");
 
         labelEjec.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        labelEjec.setForeground(new java.awt.Color(51, 179, 20));
+        labelEjec.setForeground(new java.awt.Color(255, 204, 0));
         labelEjec.setText("Proceso en Ejecucion");
         labelEjec.setToolTipText("");
 

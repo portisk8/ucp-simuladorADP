@@ -93,7 +93,7 @@ public class SPN extends Algoritmo {
     
     public void run(CuadroComparacion cuadro) {
             String mostrar = null;
-            mostrar = super.getNombre()+"\n\n";
+            mostrar = super.getNombre()+"\n---------------------------------------------------------------\n";
             Proceso proceso;//creamos un proceso de la clase proceso
             int timer = 0;//creamos una variable timer con inicializacion cero (0)
             
@@ -139,7 +139,6 @@ public class SPN extends Algoritmo {
             tiempoEstanciaMedio=(tiempoEstanciaMedio/super.getProcesos().size());
             mostrar=mostrar+"Tiempo Estancia Medio(Tr): "+tiempoEstanciaMedio+"\nTr/Ts Medio: "+tiempoNetoMedio;
             cuadro.getSpnArea().setText(mostrar);
-            super.resetProcesos();
             super.resetProcesos();
      }
 }

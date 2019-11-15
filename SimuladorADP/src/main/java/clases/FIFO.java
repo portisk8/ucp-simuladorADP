@@ -94,7 +94,7 @@ public class FIFO extends Algoritmo {
     
     public void run(CuadroComparacion cuadro) {
             String mostrar = null;
-            mostrar = super.getNombre()+"\n\n";
+            mostrar = super.getNombre()+"\n---------------------------------------------------------------\n";
             Proceso proceso;//creamos un proceso de la clase proceso
             int timer = 0;//creamos una variable timer con inicializacion cero (0)
             while(!super.todosFinalizados()){//mientras haya procesos en la tabla de pendientes por atender

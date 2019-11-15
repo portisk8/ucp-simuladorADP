@@ -109,7 +109,7 @@ public class SRT extends Algoritmo {
     
     public void run(CuadroComparacion cuadro){
             String mostrar = null;
-            mostrar = super.getNombre()+"\n\n";
+            mostrar = super.getNombre()+"\n---------------------------------------------------------------\n";
             Proceso proceso, proceso2;//creamos un proceso de la clase proceso
             int timer = 0;//creamos una variable timer con inicializacion cero (0)
             while(!super.todosFinalizados()){//mientras haya procesos en la tabla de pendientes por atender
@@ -167,7 +167,6 @@ public class SRT extends Algoritmo {
             tiempoEstanciaMedio=(tiempoEstanciaMedio/super.getProcesos().size());
             mostrar=mostrar+"Tiempo Estancia Medio(Tr): "+tiempoEstanciaMedio+"\nTr/Ts Medio: "+tiempoNetoMedio;
             cuadro.getStrArea().setText(mostrar);
-            super.resetProcesos();
             super.resetProcesos();
     }
 }
