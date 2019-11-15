@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package clases;
+import com.ucp.simuladoradp.main.CuadroComparacion;
 import com.ucp.simuladoradp.main.VentanaSimulacion;
 import java.util.*;
 import java.util.ArrayList;
@@ -88,6 +89,49 @@ public class FIFO extends Algoritmo {
                     }
                 }
         }
+            super.resetProcesos();
+     }
+    
+    public void run(CuadroComparacion cuadro) {
+            String mostrar = null;
+            mostrar = super.getNombre()+"\n\n";
+            Proceso proceso;//creamos un proceso de la clase proceso
+            int timer = 0;//creamos una variable timer con inicializacion cero (0)
+            while(!super.todosFinalizados()){//mientras haya procesos en la tabla de pendientes por atender
+                for (Proceso procesoActual : super.getProcesos()) {
+                    if(procesoActual.getInstante_entrada()==timer){
+                        super.getPendiente().addRow(procesoActual);
+                    }
+                }
+                if(super.getPendiente().getRowCount()>0 || super.getEjecutando().getRowCount()>0){
+                    if(super.getEjecutando().getRowCount() > 0){
+                        proceso = super.getEjecutando().getProceso(0);
+                    }else{
+                        proceso = super.getPendiente().getProceso(0);//carga proceso de la tabla pendiente a la variable proceso
+                        super.getPendiente().removeRow(0);//una vez cargado el proceso se remueva de la tabla pendiente
+                        super.getEjecutando().addRow(proceso);//se envia el proceso a la tabla de procesos en ejecucion
+                    }
+                    timer++;//variable timer aumenta en uno
+                    proceso.calcularDuracionRestante(1);
+                    super.getEjecutando().removeRow(0);
+                    super.getEjecutando().addRow(proceso);//se envia el proceso a la tabla de procesos en ejecucion
+                    if(proceso.getDuracionRestante()<=0){
+                        proceso.setTiempoSalida(timer);
+                        proceso.setTiempoEstancia(proceso.getTiempoSalida()-proceso.getInstante_entrada());
+                        super.getEjecutando().removeRow(0);//sacamos el proceso de la tabla procesos en ejecucion
+                        super.getListo().addRow(proceso);//cargamos el proceso en la tabla procesos terminados
+                        super.getProcesoByID(proceso.getId()).finalizar();
+                    }
+            }
+                else{
+                    timer++;
+                }
+        }
+            
+            for (int i=0;i<super.getProcesos().size();i++) {
+            mostrar = mostrar + super.getProcesos().get(i).toString();
+        }
+            cuadro.getFifoArea().setText(mostrar);
             super.resetProcesos();
      }
 }

@@ -581,7 +581,17 @@ public class VentanaSimulacion extends javax.swing.JFrame {
         // TODO add your handling code here:
         CuadroComparacion cuadro = new CuadroComparacion();
         cuadro.setVisible(true);
+        FIFO fifo = new FIFO("FIFO", "Caracteristicas", "Ventajas", procesosTableModel.getSelectedRows(), this);
+        SPN spn = new SPN("SPN", "Caracteristicas", "Ventajas", procesosTableModel.getSelectedRows(), this);
+        int valor = Integer.parseInt(this.jTextField1.getText());
+        RR rr = new RR("RR", "Caracteristicas", "Ventajas", procesosTableModel.getSelectedRows(), this, valor);
+        SRT srt = new SRT("SRT", "Caracteristicas", "Ventajas", procesosTableModel.getSelectedRows(), this);
+        fifo.run(cuadro);
+        spn.run(cuadro);
+        rr.run(cuadro);
+        srt.run(cuadro);
         this.dispose();
+        
     }//GEN-LAST:event_btnCompararActionPerformed
 
     /**

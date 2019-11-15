@@ -16,6 +16,8 @@ public class Proceso implements Comparable<Proceso>{
     private double instante_entrada;
     private double duracion;
     private double duracionRestante;
+    private double tiempoSalida;
+    private double tiempoEstancia;
     private boolean seleccionado;
     private boolean finalizado;
 
@@ -134,6 +136,38 @@ public class Proceso implements Comparable<Proceso>{
     
     public void calcularDuracionRestante(int quanto){
         this.setDuracionRestante(this.getDuracionRestante()- quanto);
+    }
+
+    /**
+     * @return the tiempoSalida
+     */
+    public double getTiempoSalida() {
+        return tiempoSalida;
+    }
+
+    /**
+     * @param tiempoSalida the tiempoSalida to set
+     */
+    protected void setTiempoSalida(double tiempoSalida) {
+        this.tiempoSalida = tiempoSalida;
+    }
+
+    /**
+     * @return the tiempoEstancia
+     */
+    public double getTiempoEstancia() {
+        return tiempoEstancia;
+    }
+
+    /**
+     * @param tiempoEstancia the tiempoEstancia to set
+     */
+    protected void setTiempoEstancia(double tiempoEstancia) {
+        this.tiempoEstancia = tiempoEstancia;
+    }
+    
+    public String toString(){
+        return "Proceso: "+this.getNombre()+"\nTiempo de Salida: "+this.getTiempoSalida()+"\nTiempo Estancia: "+this.getTiempoEstancia()+"\n\n";
     }
 }
         

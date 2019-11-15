@@ -18,7 +18,7 @@ public class CuadroComparacion extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,34 +31,34 @@ public class CuadroComparacion extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        spnArea = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        rrArea = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        fifoArea = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        strArea = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("COMPARACION");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        spnArea.setColumns(20);
+        spnArea.setRows(5);
+        jScrollPane1.setViewportView(spnArea);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        rrArea.setColumns(20);
+        rrArea.setRows(5);
+        jScrollPane2.setViewportView(rrArea);
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
+        fifoArea.setColumns(20);
+        fifoArea.setRows(5);
+        jScrollPane3.setViewportView(fifoArea);
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane4.setViewportView(jTextArea4);
+        strArea.setColumns(20);
+        strArea.setRows(5);
+        jScrollPane4.setViewportView(strArea);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -166,6 +166,7 @@ public class CuadroComparacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea fifoArea;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -173,9 +174,64 @@ public class CuadroComparacion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea rrArea;
+    private javax.swing.JTextArea spnArea;
+    private javax.swing.JTextArea strArea;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the rrArea
+     */
+    public javax.swing.JTextArea getRrArea() {
+        return rrArea;
+    }
+
+    /**
+     * @param rrArea the rrArea to set
+     */
+    public void setRrArea(javax.swing.JTextArea rrArea) {
+        this.rrArea = rrArea;
+    }
+
+    /**
+     * @return the spnArea
+     */
+    public javax.swing.JTextArea getSpnArea() {
+        return spnArea;
+    }
+
+    /**
+     * @param spnArea the spnArea to set
+     */
+    public void setSpnArea(javax.swing.JTextArea spnArea) {
+        this.spnArea = spnArea;
+    }
+
+    /**
+     * @return the strArea
+     */
+    public javax.swing.JTextArea getStrArea() {
+        return strArea;
+    }
+
+    /**
+     * @param strArea the strArea to set
+     */
+    public void setStrArea(javax.swing.JTextArea strArea) {
+        this.strArea = strArea;
+    }
+
+    /**
+     * @return the fifoArea
+     */
+    public javax.swing.JTextArea getFifoArea() {
+        return fifoArea;
+    }
+
+    /**
+     * @param fifoArea the fifoArea to set
+     */
+    public void setFifoArea(javax.swing.JTextArea fifoArea) {
+        this.fifoArea = fifoArea;
+    }
 }
