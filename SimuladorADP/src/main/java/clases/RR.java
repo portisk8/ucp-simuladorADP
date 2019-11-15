@@ -145,6 +145,7 @@ public class RR extends Algoritmo {
                     if(proceso.getDuracionRestante()<=0){
                         proceso.setTiempoSalida(timer);
                         proceso.setTiempoEstancia(proceso.getTiempoSalida()-proceso.getInstante_entrada());
+                        proceso.setTiempoNeto(proceso.getTiempoEstancia()/proceso.getDuracion());
                         super.getEjecutando().removeRow(0);//sacamos el proceso de la tabla procesos en ejecucion
                         super.getListo().addRow(proceso);//cargamos el proceso en la tabla procesos terminados
                         super.getProcesoByID(proceso.getId()).finalizar();
@@ -154,9 +155,16 @@ public class RR extends Algoritmo {
                     timer++;
             }
         }
+            double tiempoNetoMedio=0;
+            double tiempoEstanciaMedio=0;
             for (int i=0;i<super.getProcesos().size();i++) {
             mostrar = mostrar + super.getProcesos().get(i).toString();
+            tiempoNetoMedio=tiempoNetoMedio+super.getProcesos().get(i).getTiempoNeto();
+            tiempoEstanciaMedio=tiempoEstanciaMedio+super.getProcesos().get(i).getTiempoEstancia();
         }
+            tiempoNetoMedio=(tiempoNetoMedio/super.getProcesos().size());
+            tiempoEstanciaMedio=(tiempoEstanciaMedio/super.getProcesos().size());
+            mostrar=mostrar+"Tiempo Estancia Medio(Tr): "+tiempoEstanciaMedio+"\nTr/Ts Medio: "+tiempoNetoMedio;
             cuadro.getRrArea().setText(mostrar);
             super.resetProcesos();
             super.resetProcesos();
