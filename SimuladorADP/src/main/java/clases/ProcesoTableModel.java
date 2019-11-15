@@ -172,7 +172,7 @@ public boolean isCellEditable(int rowIndex, int columnIndex)
     /**
      * @param listProcess the listProcess to set
      */
-    public void setListProcess(ArrayList<Proceso> listProcess) {
+    private void setListProcess(ArrayList<Proceso> listProcess) {
         this.listProcess = listProcess;
     }
 }

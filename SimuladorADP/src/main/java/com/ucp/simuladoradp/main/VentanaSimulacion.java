@@ -30,7 +30,6 @@ public class VentanaSimulacion extends javax.swing.JFrame {
     private ArrayList<Proceso> listProcess;//crea una lista de procesos
     private ProcesoTableModel procesosTableModel;
     private String planificador;
-    private int nuevoQanto;
 
     /**
      * Creates new form FifoView
@@ -699,14 +698,6 @@ public class VentanaSimulacion extends javax.swing.JFrame {
 
     private void setPlanificador(String planificador) {
         this.planificador = planificador;
-    }
-
-    public int getNuevoQanto() {
-        return nuevoQanto;
-    }
-
-    public void setNuevoQanto(int nuevoQanto) {
-        this.nuevoQanto = nuevoQanto;
     }
 
     public javax.swing.JPanel getPanelEjec() {

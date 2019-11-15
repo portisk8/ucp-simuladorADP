@@ -173,7 +173,7 @@ public class RR extends Algoritmo {
         return quanto;
     }
 
-    public void setQuanto(int quanto) {
+    private void setQuanto(int quanto) {
         this.quanto = quanto;
     }
 }

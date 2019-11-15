@@ -28,27 +28,27 @@ public class Algoritmo extends Thread{
         this.setProcesos(new ArrayList<Proceso>());
     }
     
-    public Algoritmo(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, VentanaSimulacion fifoView){
+    public Algoritmo(String nombre, String caracteristicas, String ventaja, ArrayList<Proceso> procesos, VentanaSimulacion view){
         this.setNombre(nombre);
         this.setCaracteristicas(caracteristicas);
         this.setVentaja(ventaja);
         this.setProcesos(new ArrayList<Proceso>());
-        this.view = fifoView;
+        this.setView(view);
         Collections.sort(procesos);
         this.setPendiente(new ProcesoTableModel(new ArrayList<Proceso>()));
         this.setEjecutando(new ProcesoTableModel(new ArrayList<Proceso>()));
         this.setListo(new ProcesoTableModel(new ArrayList<Proceso>()));
         this.setProcesos(procesos);
-        this.view.getjTableProcesosEspera().setModel(this.getPendiente());
-        this.view.getjTableProcesoEnCurso().setModel(this.getEjecutando());
-        this.view.getjTableProcesosTerminados().setModel(this.getListo());
+        this.getView().getjTableProcesosEspera().setModel(this.getPendiente());
+        this.getView().getjTableProcesoEnCurso().setModel(this.getEjecutando());
+        this.getView().getjTableProcesosTerminados().setModel(this.getListo());
     }
     
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    private void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -56,7 +56,7 @@ public class Algoritmo extends Thread{
         return caracteristicas;
     }
 
-    public void setCaracteristicas(String caracteristicas) {
+    private void setCaracteristicas(String caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
 
@@ -65,7 +65,7 @@ public class Algoritmo extends Thread{
         return ventaja;
     }
 
-    public void setVentaja(String ventaja) {
+    private void setVentaja(String ventaja) {
         this.ventaja = ventaja;
     }
 
@@ -111,7 +111,7 @@ public class Algoritmo extends Thread{
     /**
      * @param pendiente the pendiente to set
      */
-    public void setPendiente(ProcesoTableModel pendiente) {
+    private void setPendiente(ProcesoTableModel pendiente) {
         this.pendiente = pendiente;
     }
 
@@ -125,7 +125,7 @@ public class Algoritmo extends Thread{
     /**
      * @param ejecutando the ejecutando to set
      */
-    public void setEjecutando(ProcesoTableModel ejecutando) {
+    private void setEjecutando(ProcesoTableModel ejecutando) {
         this.ejecutando = ejecutando;
     }
 
@@ -139,7 +139,7 @@ public class Algoritmo extends Thread{
     /**
      * @param listo the listo to set
      */
-    public void setListo(ProcesoTableModel listo) {
+    private void setListo(ProcesoTableModel listo) {
         this.listo = listo;
     }
     
