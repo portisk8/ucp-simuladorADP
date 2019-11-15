@@ -203,8 +203,7 @@ public class Main extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         VentanaSimulacion view = new VentanaSimulacion();
-        view.ocltarLabel();
-        view.ocltarTextBox();
+        view.setBounds(1000, 325, 1000, 325);
         view.setLocationRelativeTo(null);
         view.setVisible(true);
         view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -111,7 +111,7 @@ public class RR extends Algoritmo {
     
     public void run(CuadroComparacion cuadro) {
             String mostrar = null;
-            mostrar = super.getNombre()+"\n\n";
+            mostrar = super.getNombre()+"  quanto: "+this.getQuanto()+"\n\n";
             Proceso proceso, proceso2;//creamos un proceso de la clase proceso
             int timer = 0, tiempoDisponible = 0;//creamos una variable timer con inicializacion cero (0)
             while(!super.todosFinalizados()){//mientras haya procesos en la tabla de pendientes por atender

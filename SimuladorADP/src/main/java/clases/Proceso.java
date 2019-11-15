@@ -167,7 +167,7 @@ public class Proceso implements Comparable<Proceso>{
     }
     
     public String toString(){
-        return "Proceso: "+this.getNombre()+"\nTiempo de Salida: "+this.getTiempoSalida()+"\nTiempo Estancia: "+this.getTiempoEstancia()+"\n\n";
+        return "Proceso: "+this.getNombre()+" - I.E: "+this.getInstante_entrada()+" - T.E: "+this.getDuracion()+"\nTiempo de Salida: "+this.getTiempoSalida()+"\nTiempo Estancia: "+this.getTiempoEstancia()+"\n\n";
     }
 }
         
