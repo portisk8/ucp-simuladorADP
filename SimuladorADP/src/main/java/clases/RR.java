@@ -36,14 +36,6 @@ public class RR extends Algoritmo {
         super(nombre, caracteristicas, ventaja);
         this.setProcesos(new ArrayList<Proceso>());
     }
-    
-    public boolean agregarProceso(Proceso proceso){
-        return this.getProcesos().add(proceso);
-    }
-    
-    public boolean quitarProceso(Proceso proceso){
-        return this.getProcesos().remove(proceso);
-    }
 
     public void run() {
             Proceso proceso, proceso2;//creamos un proceso de la clase proceso
