@@ -184,5 +184,10 @@ public class Proceso implements Comparable<Proceso>{
     protected void setTiempoNeto(double tiempoNeto) {
         this.tiempoNeto = tiempoNeto;
     }
+    
+    public void resetear(){
+        this.setDuracionRestante(this.getDuracion());
+        this.setFinalizado(false);
+    }
 }
         

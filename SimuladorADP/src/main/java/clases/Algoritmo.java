@@ -155,8 +155,7 @@ public class Algoritmo extends Thread{
     
     public void resetProcesos(){
         for (Proceso proceso : this.getProcesos()) {
-            proceso.setDuracionRestante(proceso.getDuracion());
-            proceso.setFinalizado(false);
+            proceso.resetear();
         }
     }
 
